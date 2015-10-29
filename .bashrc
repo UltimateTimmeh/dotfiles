@@ -61,20 +61,6 @@ alias pdf='evince'
 # pyFormex aliases
 alias pysea='pyformex --search --'
 
-# Command for launching the TAVIguide pyFormex version from within the coverage framework.
-pyformex-tg-coverage() {
-  if [ $# -ne 1 ]
-  then
-    echo "Usage: pyformex-tg-coverage WORKDIR"
-    echo "Launch the TAVIguide pyFormex version from within the coverage framework"
-    echo "inside WORKDIR."
-  else
-    cd $1
-    python -m coverage run /home/tim/pyformex/pyformex_tg/pyformex/pyformex --redirect --oldabq
-    python -m coverage html --omit='/usr/*','*test_*','*__init__*','/home/tim/pyformex/*'
-  fi
-}
-
 # Commands for copying TAVIguide benchmark case files from feops1 to the local machine for testing.
 BENCH_ROOT="feops1:/home/feops/TAV/Verification/SystemVerification/benchmark"
 REPLAY_ROOT="/home/tim/tavireplay"
