@@ -60,34 +60,3 @@ alias pdf='evince'
 
 # pyFormex aliases
 alias pysea='pyformex --search --'
-
-# Commands for copying TAVIguide benchmark case files from feops1 to the local machine for testing.
-BENCH_ROOT="feops1:/home/feops/TAV/Verification/SystemVerification/benchmark"
-REPLAY_ROOT="/home/tim/tavireplay"
-TEST_ROOT="/work/cases"
-TEST_ROOT_ALT=${TEST_ROOT//'/'/'-'}
-
-taviguide-pp-benchmark-copy() {
-  if [ $# -ne 3 ]
-  then
-    echo "Usage: taviguide-pp-benchmark-copy TASK BENCH_ID TEST_ID"
-    echo "Copy TAVIguide benchmark files necessary for executing TASK of TEST_ID, which"
-    echo "is an instance of TAVIguide benchmark case BENCH_ID."
-  elif [ $1 = 'seg' ]
-  then
-    scp -r "$BENCH_ROOT/$2/segmentation/*" "$TEST_ROOT/$3/segmentation"
-    for FILE_NAME in "annular_plane.csv" "PR.mcs" "PR_aorta.stl" "PR_aortacalcs.stl" "PR_valve.stl" "PR_valvecalcs.stl"
-    do
-      mv "$TEST_ROOT/$3/segmentation/$2-$FILE_NAME" "$TEST_ROOT/$3/segmentation/$3-$FILE_NAME"
-    done
-    for FILE_NAME in "slice1.PNG"
-    do
-      mv "$TEST_ROOT/$3/segmentation/root_slices/$2-$FILE_NAME" "$TEST_ROOT/$3/segmentation/root_slices/$3-$FILE_NAME"
-    done
-  elif [ $1 = 'feapre' -o $1 = 'feapreqc' -o $1 = 'feapost' -o $1 = 'feapostqc' -o $1 = 'cfdpostqc' ]
-  then
-    scp "$BENCH_ROOT/$2/replay/$2_replay.py" "$REPLAY_ROOT/$TEST_ROOT_ALT-$3_replay_$1.py"
-  else
-    echo "Task '$1' not known. Choose one of: [seg, feapre, feapreqc, feapost, feapostqc, cfdpostqc]"
-  fi
-}
