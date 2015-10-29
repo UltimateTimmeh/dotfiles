@@ -35,13 +35,13 @@ done
 # Create symlink to binary directory.
 backup_and_link $DOTROOT/bin $HOME/bin $BAKDIR
 
-# Create symlinks to emacs config directory.
+# Create symlink to xfce4-terminal config directory.
+mkdir -pv $HOME/.config/xfce4
+backup_and_link $DOTROOT/terminal $HOME/.config/xfce4/terminal $BAKDIR
+
+# Create symlink to emacs config directory.
 backup_and_link $DOTROOT/.emacs.d $HOME/.emacs.d $BAKDIR
 
 # Create symlink to pyFormex config directory.
 mkdir -pv $HOME/.config
 backup_and_link $DOTROOT/pyformex $HOME/.config/pyformex $BAKDIR
-
-# Create symlink to xfce4-terminal config directory.
-mkdir -pv $HOME/.config/xfce4
-backup_and_link $DOTROOT/terminal $HOME/.config/xfce4/terminal $BAKDIR
