@@ -1,2 +1,9 @@
+# Backups and logs
+##################
 *~
-
+*.tmp
+*.bak
+*#
+*.#*
+*.log
+*.out

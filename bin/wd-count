@@ -1,20 +1,18 @@
 #!/bin/bash
 # Count the contents of the current working directory.
-wd-count() {
-    CNT1=$(find . -maxdepth 1 -type d \( -iname '*' ! -iname '.*' \) | wc -l)
-    CNT2=$(find . -maxdepth 1 -type f \( -iname '*' ! -iname '.*' \) | wc -l)
-    CNT3=$(find . -maxdepth 1 -type l \( -iname '*' ! -iname '.*' \) | wc -l)
-    CNT4=`expr $(find . -maxdepth 1 -type d \( -iname '.*' \) | wc -l) - 1`
-    CNT5=$(find . -maxdepth 1 -type f \( -iname '.*' \) | wc -l)
-    CNT6=$(find . -maxdepth 1 -type l \( -iname '.*' \) | wc -l)
-    TCNT=`expr $CNT1 + $CNT2 + $CNT3 + $CNT4 + $CNT5 + $CNT6`
-    printf "=== Contents of current directory ===\n"
-    printf "* Subdirectories:        %12d\n" $CNT1
-    printf "* Files:                 %12d\n" $CNT2
-    printf "* Symbolic links:        %12d\n" $CNT3
-    printf "* Hidden subdirectories: %12d\n" $CNT4
-    printf "* Hidden files:          %12d\n" $CNT5
-    printf "* Hidden symbolic links: %12d\n" $CNT6
-    printf "Total:                   %12d\n" $TCNT
-    printf "=====================================\n"
-}
+CNT1=$(find . -maxdepth 1 -type d \( -iname '*' ! -iname '.*' \) | wc -l)
+CNT2=$(find . -maxdepth 1 -type f \( -iname '*' ! -iname '.*' \) | wc -l)
+CNT3=$(find . -maxdepth 1 -type l \( -iname '*' ! -iname '.*' \) | wc -l)
+CNT4=`expr $(find . -maxdepth 1 -type d \( -iname '.*' \) | wc -l) - 1`
+CNT5=$(find . -maxdepth 1 -type f \( -iname '.*' \) | wc -l)
+CNT6=$(find . -maxdepth 1 -type l \( -iname '.*' \) | wc -l)
+TCNT=`expr $CNT1 + $CNT2 + $CNT3 + $CNT4 + $CNT5 + $CNT6`
+printf "=== Contents of current directory ===\n"
+printf "* Subdirectories:        %12d\n" $CNT1
+printf "* Files:                 %12d\n" $CNT2
+printf "* Symbolic links:        %12d\n" $CNT3
+printf "* Hidden subdirectories: %12d\n" $CNT4
+printf "* Hidden files:          %12d\n" $CNT5
+printf "* Hidden symbolic links: %12d\n" $CNT6
+printf "Total:                   %12d\n" $TCNT
+printf "=====================================\n"

@@ -6,7 +6,10 @@
 [ -f /etc/bashrc ] && . /etc/bashrc
 [ -f /etc/bash.bashrc ] && . /etc/bash.bashrc
 
-# Set a fancy prompt (overwrite the one in /etc/profile and /etc/bash.bashrc)
+# Add $HOME/bin to PATH
+export PATH=$PATH:$HOME/bin
+
+# Set a fancy primary prompt
 export PS1='${debian_chroot:+($debian_chroot)}\[\033[01;31m\]\u@\h \[\033[01;32m\]<\d - \t> \[\033[01;34m\][\w]\n\$ \[\033[00m\]'
 
 # Use 256 colors in the terminal emulator.
@@ -132,8 +135,3 @@ taviguide-pp-benchmark-copy() {
     echo "Task '$1' not known. Choose one of: [seg, feapre, feapreqc, feapost, feapostqc, cfdpostqc]"
   fi
 }
-
-# Source all bash scripts in .local/bin/
-for SCRIPT in .local/bin/*; do
-    source $SCRIPT
-done
