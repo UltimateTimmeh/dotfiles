@@ -17,7 +17,7 @@ mkdir -pv $BAKDIR
 # $3 = Path of directory to which existing symlinkpaths are backed up.
 backup_and_link() {
     if [ -e $2 ]; then
-	printf "Backup up existing $2... "
+	printf "Back up existing $2... "
 	mv $2 $3
 	printf "DONE\n"
     fi
@@ -37,3 +37,11 @@ backup_and_link $DOTROOT/bin $HOME/bin $BAKDIR
 
 # Create symlinks to emacs config directory.
 backup_and_link $DOTROOT/.emacs.d $HOME/.emacs.d $BAKDIR
+
+# Create symlink to pyFormex config directory.
+mkdir -pv $HOME/.config
+backup_and_link $DOTROOT/pyformex $HOME/.config/pyformex $BAKDIR
+
+# Create symlink to xfce4-terminal config directory.
+mkdir -pv $HOME/.config/xfce4
+backup_and_link $DOTROOT/terminal $HOME/.config/xfce4/terminal $BAKDIR
