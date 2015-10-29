@@ -52,41 +52,11 @@ alias mv='mv -vi'
 alias cp='cp -rvi'
 alias ln='ln -i'
 
-# Aliases for quick access to often-used directories
-alias go_pyformex='cd /home/tim/pyformex/pyformex/'
-alias go_taviguide='cd /home/tim/TAVIguide/'
-alias go_feops='cd /home/tim/documents/feops/'
-alias go_timapps='cd /home/tim/documents/feops/pyFormex/timapps/'
-alias go_usb='cd /media/usb/'
-alias go_cd='cd /media/cdrom0/'
-alias go_windows='cd /media/windows/'
-alias go_dropbox='cd /media/windows/dropbox/'
-
-# Aliases for mounting and unmounting storage devices
-alias mount_usb='sudo mount -o umask=0 -t auto /dev/sdb1 /media/usb; sudo -k'
-alias umount_usb='sudo umount /media/usb; sudo -k'
-alias mount_cd='mount /dev/sr0'
-alias umount_cd='umount /media/cdrom0'
-alias mount_windows='sudo mount -t auto /dev/sda3 /media/windows; sudo -k'
-alias umount_windows='sudo umount /media/windows; sudo -k'
-
 # Make common commands shorter
-alias c='clear'
-alias n='nano'
 alias calc='libreoffice --calc'
 alias writer='libreoffice --writer'
 alias impress='libreoffice --impress'
-alias zip='zip -rv'
 alias pdf='evince'
-alias logkeys='sudo logkeys -s -u; sudo -k'
-
-# Distribute this file from the current host to all FEops hosts
-distribute-bashrc() {
-    for HOST in feops1 feops4 feopsw0 feopsw1 feops.ugent.be
-    do
-	scp ~/.bashrc $HOST:~
-    done
-}
 
 # pyFormex aliases
 alias pysea='pyformex --search --'
