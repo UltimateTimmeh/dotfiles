@@ -1,0 +1,3 @@
+#!/bin/bash
+# Create a backup of a file or directory.
+cp -rvi $1 $1.bak
