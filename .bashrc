@@ -59,4 +59,5 @@ alias impress='libreoffice --impress'
 alias pdf='evince'
 
 # pyFormex aliases
+alias pyformex='/home/tim/Documents/pyformex/pyformex/pyformex --redirect --pyside'
 alias pysea='pyformex --search --'
