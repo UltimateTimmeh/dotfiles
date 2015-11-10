@@ -16,10 +16,10 @@ BAKDIR=$DOTROOT/backups/$NR
 # $3 = Path of directory to which existing symlinkpaths are backed up.
 backup_and_link() {
     if [ -e $2 ]; then
-        echo "Back up existing $2... "
-	mkdir -pv $3
+        printf "Back up existing $2... "
+	mkdir -p $3
 	mv $2 $3
-	echo "DONE"
+	printf "DONE\n"
     fi
     printf "Linking $2 to $1... "
     ln -sn $1 $2
@@ -27,25 +27,31 @@ backup_and_link() {
 }
 
 # Create symlinks to dotfiles.
+echo "## HOME DIRECTORY DOTFILES ##"
 DOTFILES=$(find $DOTROOT -maxdepth 1 -type f \( -iname '.*' ! -iname '*ignore' ! -iname '*~' \))
 for DOTFILE in $DOTFILES; do
     backup_and_link $DOTFILE $HOME/$(basename $DOTFILE) $BAKDIR
 done
 
-# Create symlink to binary directory.
+# Create symlink to binary directory
+echo "## BINARY DIRECTORY ##"
 backup_and_link $DOTROOT/bin $HOME/bin $BAKDIR
 
 # Create symlink to ssh config.
-mkdir -pv $HOME/.ssh
+echo "## SSH CONFIG ##"
+mkdir -p $HOME/.ssh
 backup_and_link $DOTROOT/.ssh/config $HOME/.ssh/config $BAKDIR/.ssh
 
 # Create symlink to xfce4-terminal config directory.
-mkdir -pv $HOME/.config/xfce4
+echo "## XFCE4 TERMINAL CONFIG ##"
+mkdir -p $HOME/.config/xfce4
 backup_and_link $DOTROOT/terminal $HOME/.config/xfce4/terminal $BAKDIR/.config/xfce4
 
 # Create symlink to emacs config directory.
+echo "## EMACS CONFIG ##"
 backup_and_link $DOTROOT/.emacs.d $HOME/.emacs.d $BAKDIR
 
 # Create symlink to pyFormex config directory.
-mkdir -pv $HOME/.config
+echo "## PYFORMEX CONFIG ##"
+mkdir -p $HOME/.config
 backup_and_link $DOTROOT/pyformex $HOME/.config/pyformex $BAKDIR/.config
