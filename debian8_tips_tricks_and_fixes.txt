@@ -1,0 +1,114 @@
+This file contains tips, tricks and fixes for all sorts of problems that were encountered during
+configuration of my new laptop, running Debian Jessie 8.2.
+
+==============
+VOLUME CONTROL
+==============
+If there is no sound, or audio is otherwise difficult to control, the package 'pavucontrol' can be
+installed. This package allows extensive control over all things audio (both in- and output) and
+can most likely be used to fix whatever is preventing sound from coming out of the laptop's speakers.
+
+===========
+COMPOSE KEY
+===========
+To type characters like 'é' and 'ç' using a QWERTY keyboard layout, you need to configure the
+'compose' key. This can be done by editing the following line in the file /etc/default/keyboard
+(only possible with root permissions, of course):
+
+    XKBOPTIONS="compose:rctrl"
+
+This will set the right Ctrl key as the compose key. Here's a list of all compose key possibilities:
+
+    compose:ralt    Right Alt
+    compose:lwin    Left Win
+    compose:rwin    Right Win
+    compose:menu    Menu
+    compose:lctrl   Left Ctrl
+    compose:rctrl   Right Ctrl
+    compose:caps    Caps Lock
+    compose:102     &lt;Less/Greater&gt;
+    compose:paus    Pause
+    compose:prsc    PrtSc
+    compose:sclk    Scroll Lock
+
+You need to reboot for the change to take effect. Once restarted, you can try typing an 'é'. Open a
+text editor. While holding the compose key, type the "'" key. Release the compose key and then type
+'e'. The result should be 'é'. Try different combinations! Can you figure out how to type 'ç'?
+
+==============
+LOW RESOLUTION
+==============
+It's possible that, after completing the installation process, it appears as though the resolution
+of your applications is wrong (e.g. the desktop resolution looks fine but the text in the menus is
+bigger than you expected, everything in your browser looks huge, etc...). This might not be a problem
+with resolution at all, but with the DPI setting. To fix this, open 'Application Menu --> Settings
+--> Appearance'. In the tab 'Fonts', you can change the DPI setting. A good default setting is 96. If
+it already is 96, then just change it to whatever (e.g. 97) and change it back. This will trigger
+an update to the correct DPI setting, and you should immediately see the size of text in the
+'Appearance' menu change to something that looks better. For the changes to take effect in other
+applications (such as your browser), you might have to restart the application. A full reboot should
+not be necessary.
+
+If the "resolution" of the Debian login screen also looks incorrect, then the previously mentioned
+steps won't fix that. Here you need to manually configure the DPI setting in the /etc/X11/xorg.conf
+file (using root privileges). In the 'Monitor' section, add the following:
+
+    Section "Monitor"
+        ...
+	Option         "DPI"   "96 x 96" (<-- add this line)
+    EndSection
+
+Of cource you can use whatever you want instead of 96. Now reboot, and your login screen should look
+OK.
+
+======
+ABAQUS
+======
+Abaqus is installed by copying it from the feops1 server. Of course this means you need to have a
+user account on feops1. As root, do the following:
+
+    # mkdir -pv /usr/local/abaqus/Commands
+    # rsync user@feops1:/usr/local/abaqus/VER /usr/local/abaqus -av[n]
+
+In the second command VER is one of 6.10-1, 6.11-1, 6.12-1, 6.13-5, 6.14-1, 6.5-4, 6.6-2, 6.7-3,
+6.8-1, 6.9-2, 6.9-EF1. The second command should be repeated for every version you wish to install.
+The optional n parameter is to execute a dry run of the rsync operation, to make sure what will be
+copied is correct.
+
+Then, to create the abaqus links and choose a default version, do the following (still as root):
+
+    # rsync user@feops1:/usr/local/sbin/abq_links /usr/local/sbin
+    # rsync user@feops1:/usr/local/bin/abq_lic /usr/local/bin
+    # abq_links
+
+That should be it!
+
+========
+RSS FEED
+========
+
+I am using tickr to see a see an always-visible banner containing a live stream of my RSS feeds
+(think of the sliding banner of text at the bottom of the screen on news channels such as CNN,
+etc...) during normal operations on my laptop. To get this effect:
+
+1) Import the tickr-config file from the .dotfiles repository into tickr. Using this config, the
+   tickr window will be located at the bottom of the screen and will not always be on top of all
+   windows.
+2) Because the tickr window is not always on top, it might be hidden by an xfce4-panel that is
+   located at the bottom. To make the tickr window visible during normal operations, you should make
+   the panel automatically show and hide itself (see the panel's preferences for this setting). This
+   is generally a good idea anyway, to maximize the amount of workspace you have for your windows.
+   When you need the panel, move your mouse to the bottom of the screen and it will appear (covering
+   any window that might occupy the same space of the screen). Move your mouse away from the panel to
+   make it hide itself again.
+3) Because the tickr window is not always on top, it might be hidden by maximized windows that occupy
+   the same region of the screen. To be able to work in maximized windows but still always see the
+   tickr feed at the bottom of the screen, you need to limit the region of the screen that can be
+   occupied by windows. Go to 'Application Menu --> Settings --> Workspaces'. In the 'Margins' tab,
+   set a bottom margin such that maximized windows don't overlap the tickr feed, but also don't leave
+   a gap between the maximized window and the tickr window. For the tickr config in this .dotfiles
+   repository, a margin of 18 pixels should be what you're looking for.
+
+The xfce desktop environment and tickr are both extremely customizable, and can be configured to get
+pretty much any effect you desire by playing with colors, opacities, window locations, dimensions
+and workspace margins. Have fun!
