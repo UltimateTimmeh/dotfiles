@@ -1,5 +1,6 @@
 #!/bin/bash
 # Config
+gui='--gui'
 pyformex='/home/tim/Documents/pyformex/pyformex/pyformex --redirect --pyside'
 TGPPROOT=/home/tim/Documents/feops/taviguide/taviguide-pp-master
 
@@ -10,7 +11,7 @@ WDBAK=$(pwd)
 cd $TGPPROOT/taviguide/tests
 
 # Execute taviguide-pp unit tests from within coverage framework.
-python -m coverage run $pyformex run_unittests.py
+python -m coverage run $pyformex $gui run_unittests.py
 python -m coverage html --omit='/usr/*','*tests*','*__init__*','/home/tim/Documents/pyformex/*'
 
 # Create timestamped unittest log directory.
