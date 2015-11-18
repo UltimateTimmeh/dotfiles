@@ -1,6 +1,6 @@
--delay=15
+-delay=10
 -shiftsize=1
--fontname="Sans "
+-fontname="Sans                            "
 -fontsize=10
 -fgcolor="#000000ff"
 -bgcolor="#eeeeecff"

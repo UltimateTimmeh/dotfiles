@@ -91,9 +91,9 @@ I am using tickr to see a see an always-visible banner containing a live stream 
 (think of the sliding banner of text at the bottom of the screen on news channels such as CNN,
 etc...) during normal operations on my laptop. To get this effect:
 
-1) Import the tickr-config file from the .dotfiles repository into tickr. Using this config, the
-   tickr window will be located at the bottom of the screen and will not always be on top of all
-   windows.
+1) The installsymlinks script included in the dotfiles installs the tickr config that is included in
+   this dotfiles repository. Using this config, the tickr window will be located at the bottom of the
+   screen and will not always be on top of all windows.
 2) Because the tickr window is not always on top, it might be hidden by an xfce4-panel that is
    located at the bottom. To make the tickr window visible during normal operations, you should make
    the panel automatically show and hide itself (see the panel's preferences for this setting). This

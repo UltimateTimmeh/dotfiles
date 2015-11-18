@@ -13,7 +13,7 @@ BAKDIR=$DOTROOT/backups/$NR
 # General function for backing up and symlinking configurations.
 # $1 = Symbolic link target.
 # $2 = Symbolic link path.
-# $3 = Path of directory to which existing symlinkpaths are backed up.
+# $3 = Path of directory to which existing symlinkpath is backed up.
 backup_and_link() {
     if [ -e $2 ]; then
         printf "Back up existing $2... "
@@ -41,6 +41,11 @@ backup_and_link $DOTROOT/bin $HOME/bin $BAKDIR
 echo "## SSH CONFIG ##"
 mkdir -p $HOME/.ssh
 backup_and_link $DOTROOT/.ssh/config $HOME/.ssh/config $BAKDIR/.ssh
+
+# Create symlink to tickr config.
+echo "## TICKR CONFIG ##"
+mkdir -p $HOME/.tickr
+backup_and_link $DOTROOT/.tickr/tickr-conf $HOME/.tickr/tickr-conf $BAKDIR/.tickr
 
 # Create symlink to xfce4-terminal config directory.
 echo "## XFCE4 TERMINAL CONFIG ##"
