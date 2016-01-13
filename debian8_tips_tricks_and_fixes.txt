@@ -112,3 +112,37 @@ etc...) during normal operations on my laptop. To get this effect:
 The xfce desktop environment and tickr are both extremely customizable, and can be configured to get
 pretty much any effect you desire by playing with colors, opacities, window locations, dimensions
 and workspace margins. Have fun!
+
+====================
+DUALBOOT CLOCK SETUP
+====================
+
+When switching between Windows and Debian, there can be a few problem concerning the clock showing
+an incorrect time on either Debian or Windows. For me the problem was as follows. I manually set
+the hardware clock to UTC, because Debian assumes the hardware clock to be UTC and then adjusts
+that to local time depending on the configured time zone. But when I switch to Windows, the clock
+on Windows would be one hour behind (because it assumes the hardware clock to be local time). After
+a while (and if there is an internet connection), Windows will update the hardware clock to the
+correct local time. If I switch back to Debian, the clock there will now be one hour ahead. To get
+the correct time back on Debian, I have to reboot into the BIOS and manually set the hardware clock
+back to UTC. That's just plain annoying, so I figured out this permanent fix:
+
+1) Install NTP (I'm not actually sure this step is required for this fix to work). This package is
+   supposed to automatically set the clock over the internet. However, since I always had to go
+   into the BIOS to manually set the hardware clock back to UTC if I wanted the correct time back
+   on Debian after having switched to Windows, I'm not entirely sure this works properly for me.
+
+   # apt-get install ntp
+
+2) Edit the file /etc/adjtime to make Debian look at the hardware clock as local time instead of
+   UTC.
+
+   # nano /etc/adjtime
+
+   Change 'UTC' to 'LOCAL' and save the file.
+
+3) Reboot. After restarting, Debian will assume the hardware clock to be local time and no offset
+   will be applied (just like Windows does). From now on, the time should always be the same on both
+   operating systems. If this time is currently incorrect, then you will either have to wait for
+   Debian to update the clock using NTP (if it works), switch to Windows and let it update the clock
+   or jump into the BIOS and do it yourself.
