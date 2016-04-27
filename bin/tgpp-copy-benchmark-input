@@ -10,7 +10,7 @@ if [ $# -ne 4 ]; then
 fi
 
 BENCHROOT=$4"@feops1:/home/feops/TAV/Verification/SystemVerification/benchmark"
-REPLAYROOT="/home/test_op/tavireplay"
+REPLAYROOT=$HOME"/tavireplay"
 TESTROOT="/test/cases"
 TESTROOTALT=${TESTROOT//'/'/'-'}
 
