@@ -1,15 +1,16 @@
 #!/bin/bash
 # Copy TAVIguide benchmark case input files over from the server.
 
-if [ $# -ne 3 ]; then
-    echo "Usage: tgpp-copy-benchmark-input TASK BENCHID TESTID"
+if [ $# -ne 4 ]; then
+    echo "Usage: tgpp-copy-benchmark-input TASK BENCHID TESTID USER"
     echo "Copy the TAVIguide benchmark case input files necessary for executing TASK"
-    echo "of case TESTID, which is an instance of TAVIguide benchmark case BENCHID."
+    echo "of case TESTID, which is an instance of TAVIguide benchmark case BENCHID"
+    echo "as USER."
     exit
 fi
 
-BENCHROOT="feops1:/home/feops/TAV/Verification/SystemVerification/benchmark"
-REPLAYROOT="/home/tim/Documents/taviguide/replay"
+BENCHROOT=$4"@feops1:/home/feops/TAV/Verification/SystemVerification/benchmark"
+REPLAYROOT="/home/test_op/tavireplay"
 TESTROOT="/test/cases"
 TESTROOTALT=${TESTROOT//'/'/'-'}
 
