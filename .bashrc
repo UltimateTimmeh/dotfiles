@@ -61,3 +61,6 @@ alias pdf='evince'
 # pyFormex aliases
 alias pyformex='/home/tim/Documents/pyformex/pyformex/pyformex --redirect --pyside'
 alias pysea='pyformex --search --'
+
+# Mount TAVIguide research case directory with sshfs
+alias mount-tgrc='sshfs tim@feops1:/home/taviguide/cases /mnt/taviguide-research-cases -C -o allow_other'
