@@ -9,7 +9,7 @@
 -disablescreenlimits=n
 -win_x=0
 -win_y=1062
--win_w=1920
+-win_w=3840
 -win_h=15
 -windec=n
 -alwaysontop=n
