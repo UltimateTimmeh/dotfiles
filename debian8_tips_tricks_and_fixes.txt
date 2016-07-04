@@ -146,3 +146,53 @@ back to UTC. That's just plain annoying, so I figured out this permanent fix:
    operating systems. If this time is currently incorrect, then you will either have to wait for
    Debian to update the clock using NTP (if it works), switch to Windows and let it update the clock
    or jump into the BIOS and do it yourself.
+
+=================
+MULTIPLE MONITORS
+=================
+
+When using multiple monitors, open the nvidia-settings application with root permissions. Go to
+the "Display Configuration" tab. Activate the 'Advanced...' settings and check 'Enable Base
+Mosaic'. Now select the secondary screen, and set its 'Position' to the correct relative setting.
+Save the settings to the X Configuration File (don't merge with existing). Apply the changes.
+Workspaces should now be stretched to include the second monitor.
+
+The tickr RSS feed banner needs to be updated to use the full length of the screen.
+
+A panel (i.e. the bar at the bottom of the screen) needs to be added on the second screen. Right
+click the existing panel on the primary monitor and select 'Panel -> Panel Preferences...'.
+Click the '+' icon next to the list of panels to add a new panel and move it to the correct location
+on the secondary screen. Give it the following settings:
+
+    Display
+    -------
+    Mode: Horizontal
+    Output: Automatic
+    Span monitors: no
+    Lock panel: yes
+    Automatically show and hide the panel: yes
+    Don't reserve space on borders: yes
+    Row Size (pixels): 30
+    Number of rows: 1
+    Length (%): 100
+    Automatically increase the length: yes
+
+    Appearance
+    ----------
+    Style: None (use system style)
+
+    Items
+    -----
+    Applications Menu
+    Launcher ; Xfce Terminal ; Terminal Emulator ; xfce4-terminal
+    Launcher ; File Manager PCManFM ; Browse the file system and manage the files ; pcmanfm
+    Launcher ; Google Chrome ; Access the Internet ; google-chrome %U
+    Launcher ; Icedove ; Read/Write Mail/News with Icedove ; icedove %U
+    Launcher ; pyFormex DEV ; Launch the developer version of pyFormex ; /path/to/pyformex --redirect --pyside
+    Window Buttons
+    Separator ; Transparent ; expand
+    Workspace Switcher
+    Launcher ; PulseAudio Volume Control ; Adjust the volume level ; pavucontrol
+    Notification Area ; don't show frame (only possible in one panel)
+    Battery Monitor ; Display icon, bar, percentage in tooltop, time remaining in tooltop
+    DateTime ; Date, then time ; Sans Italic 9 1999-12-31 ; Sans 11 23:59:59
