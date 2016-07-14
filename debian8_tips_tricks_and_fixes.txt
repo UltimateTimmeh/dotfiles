@@ -196,3 +196,71 @@ on the secondary screen. Give it the following settings:
     Notification Area ; don't show frame (only possible in one panel)
     Battery Monitor ; Display icon, bar, percentage in tooltop, time remaining in tooltop
     DateTime ; Date, then time ; Sans Italic 9 1999-12-31 ; Sans 11 23:59:59
+
+======
+EMOJIS
+======
+
+The default installation of Debian Jessie at the point of writing does not include any fonts for
+emojis. With the increased use of emojis online due to the popularity of smartphones, being able
+to see emojis in your browser is a plus. Follow the steps below to install emojis. Note that in
+certain browsers (e.g. Firefox) the emojis should be in color. Other browsers don't support this
+type of colored font yet (e.g. Chrome), so in those browsers the emojis will not be colored in.
+
+1) Download the EmojiOne Color font from GitHub:
+
+   https://github.com/eosrei/emojione-color-font/releases/
+
+2) Unzip (if applicable) and move the file to
+
+   ~/home/.fonts
+
+3) Create a file
+
+   ~/home/.config/fontconfig/fonts.conf
+
+   which contains the following:
+
+   <?xml version="1.0" encoding="UTF-8"?>
+   <!DOCTYPE fontconfig SYSTEM "fonts.dtd">
+
+   <fontconfig>
+     <!--
+     Make Emoji One Color the initial fallback font for sans-serif, sans, and
+     monospace. Override any specific requests for Apple Color Emoji.
+     -->
+     <match>
+       <test name="family"><string>sans-serif</string></test>
+       <edit name="family" mode="prepend" binding="strong">
+         <string>Emoji One Color</string>
+       </edit>
+     </match>
+     <match>
+       <test name="family"><string>serif</string></test>
+       <edit name="family" mode="prepend" binding="strong">
+         <string>Emoji One Color</string>
+       </edit>
+     </match>
+     <match>
+       <test name="family"><string>monospace</string></test>
+       <edit name="family" mode="prepend" binding="strong">
+         <string>Emoji One Color</string>
+       </edit>
+     </match>
+     <match>
+       <test name="family"><string>Apple Color Emoji</string></test>
+       <edit name="family" mode="prepend" binding="strong">
+         <string>Emoji One Color</string>
+       </edit>
+     </match>
+   </fontconfig>
+
+4) Flush the font cache with the following command:
+
+   fc-cache -fv
+
+5) Check if the font works by opening a new instance of your web browser and visiting the
+   following page:
+
+   http://eosrei.github.io/emojione-color-font/full-demo.html
+
