@@ -22,7 +22,7 @@ Options:
   -r NEWID : When given, all copied files are renamed to have BENCHID replaced
              with NEWID.
   -b BENCHROOT : Specify the root directory of the benchmark cases. The default
-                 is '/home/feops/TAV/Verification/SystemVerification/benchmark'.
+                 is '/home/feops/TAV/Verification/SystemVerification/testdata/benchmark'.
 
 Examples:
 
@@ -89,7 +89,7 @@ rename_by_replace() {
 
 
 # Process the arguments.
-BENCHROOT=/home/feops/TAV/Verification/SystemVerification/benchmark
+BENCHROOT=/srv/webdav/TAV/Verification/SystemVerification/testdata/benchmark
 DRY=
 DONE=0
 LIST=0
