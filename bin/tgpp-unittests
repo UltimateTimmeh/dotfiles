@@ -2,7 +2,7 @@
 # Config
 gui='--gui'
 pyformex='/home/tim/Documents/pyformex/pyformex/pyformex --redirect --pyside'
-TGPPROOT=/home/tim/Documents/feops/taviguide/taviguide-pp-1.1
+TGPPROOT=/home/tim/Documents/feops/taviguide/taviguide-pp
 
 # Backup current working directory.
 WDBAK=$(pwd)
