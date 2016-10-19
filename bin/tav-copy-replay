@@ -1,5 +1,5 @@
 #!/bin/bash
-# Copy TAVIguide benchmark replay files.
+# Copy TAVIguide-pp task replay files.
 
 # Functions
 VALIDTASKS="feapre feapreqc feapost feapostqc cfdpostqc"
@@ -11,9 +11,11 @@ usage() {
 Usage: $(basename $0) [options] TASK SRCID TGTID
 
 Copy the replay file necessary for executing TASK of case TGTID (which is
-an instance of source case SRCID) in TAVIguide-pp.
+an instance of source case SRCID) in TAVIguide-pp. TASK can be one of
+'feapre', 'feapreqc', 'feapost', 'feapostqc' or 'cfdpostqc'.
 
 Options:
+
   -n : Dry run. Only show what would happen, but don't actually do anything.
   -l : List the available source cases.
   -t SRCTYPE : Specify the type of source case.
@@ -21,7 +23,7 @@ Options:
         Other options for the source case type are:
           - 'TAV' (production cases)
           - 'TST' (test cases)
-        See 'feops1:/srv/webdav/TAV/Verification/SystemVerification/testdata'
+        Go to 'feops1:/srv/webdav/TAV/Verification/SystemVerification/testdata'
         for more direct access to the available source cases.
   -c TGTCASESDIR : Target cases directory.
         Also known in TAVIguide-pp as the cases_path where case TSTID can be
@@ -32,32 +34,42 @@ Options:
         This is where the copied replay file will be placed.
         The default target replay directory is:
           - '~/tavireplay'
-  -u USER : Perform rsync operation as this user.
+  -u USER : Perform ssh and rsync operation(s) as this user.
+
+Source cases:
+
+  Source cases are located in subdirectories of 'feops1:/srv/webdav/TAV/
+  Verification/SystemVerification/testdata', depending on the type:
+    - 'BCH' for benchmark cases,
+    - 'TAV' for production cases and
+    - 'TST' for test cases.
+  If you want to change source cases or make new ones available for testing
+  purposes, this is where you do it.
 
 Examples:
 
-1. Listing all production source cases:
+  1. Listing all production source cases:
 
-     $ $(basename $0) -lt TAV
+       $ $(basename $0) -lt TAV
 
-2. Copying the replay file for executing the FEA preprocessing task of
-   case TST000321 (which is an instance of production source case TAV000123)
-   as user 'feops':
+  2. Copying the replay file for executing the FEA preprocessing task of
+     case TST000321 (which is an instance of production source case TAV000123)
+     as user 'feops':
 
-     $ $(basename $0) -u feops -t TAV feapre TAV000123 TST000321
+       $ $(basename $0) -u feops -t TAV feapre TAV000123 TST000321
 
-   The selected replay file will be placed in TGTREPLAYDIR and will be named
-   <TGTCASESDIR>-TST000000_feapre.py, where <TGTCASESDIR> is TGTCASESDIR with
-   slashes replaced by dashes (this naming convention is used by the code in
-   the replay file to set the correct cases_path in TAVIguide-pp).
+     The selected replay file will be placed in TGTREPLAYDIR and will be named
+     <TGTCASESDIR>-TST000000_feapre.py, where <TGTCASESDIR> is TGTCASESDIR with
+     slashes replaced by dashes (this naming convention is used by the code in
+     the replay file to set the correct cases_path in TAVIguide-pp).
 
 EOF
 }
 
 
 get_source_cases() {
-    local SRCIDS
     # Get source cases on machine $1, directory $2.
+    local SRCIDS
     SRCIDS=$(ssh $1 "ls $2")
     echo "$SRCIDS"
 }

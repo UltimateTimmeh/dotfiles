@@ -1,0 +1,156 @@
+#!/bin/bash
+# Copy TAVIguide-web task output files.
+
+# Functions
+VALIDTASKS="seg"
+
+
+usage() {
+    cat <<EOF
+
+Usage: $(basename $0) [options] TASK SRCID TGTID
+
+Copy the output files necessary for completing TASK of case TGTID (which is
+an instance of source case SRCID) in TAVIguide-web. TASK can be one of
+'seg'. The other tasks 'feapre', 'feapreqc', 'feapost', 'feapostqc' and 
+'cfdpostqc' are coming but are not yet implemented.
+
+Options:
+
+  -n : Dry run. Only show what would happen, but don't actually do anything.
+  -l : List the available source cases.
+  -t SRCTYPE : Specify the type of source case.
+        The default source case type is 'BCH' (benchmark cases)
+        Other options for the source case type are:
+          - 'TAV' (production cases)
+          - 'TST' (test cases)
+        Go to 'feops1:/srv/webdav/TAV/Verification/SystemVerification/testdata'
+        for more direct access to the available source cases.
+  -c TGTCASESDIR : Target cases directory.
+        Also known in TAVIguide-pp as the cases_path where case TSTID can be
+        found.
+        The default target cases directory is:
+          - '/test/cases'
+  -u USER : Perform ssh and rsync operation(s) as this user.
+
+Source cases:
+
+  Source cases are located in subdirectories of 'feops1:/srv/webdav/TAV/
+  Verification/SystemVerification/testdata', depending on the type:
+    - 'BCH' for benchmark cases,
+    - 'TAV' for production cases and
+    - 'TST' for test cases.
+  If you want to change source cases or make new ones available for testing
+  purposes, this is where you do it.
+
+Examples:
+
+  1. Listing all production source cases:
+
+       $ $(basename $0) -lt TAV
+
+  2. Copying the output files for completing the segmentation task of
+     case TST000321 (which is an instance of production source case TAV000123)
+     as user 'feops':
+
+       $ $(basename $0) -u feops -t TAV seg TAV000123 TST000321
+
+     The output files for the selected task will be placed in the correct
+     location in TGTCASESDIR. All copied directories and files with SRCID in
+     their name will then be renamed by replacing SRCID with TGTID.
+
+EOF
+}
+
+
+get_source_cases() {
+    # Get source cases on machine $1, directory $2.
+    local SRCIDS
+    SRCIDS=$(ssh $1 "ls $2")
+    echo "$SRCIDS"
+}
+
+
+rename_files_by_replace() {
+    # All files in directory $1 that have $2 in them are renamed by replacing $2 with $3.
+    find $1 -depth -name "$2[.-]*" -exec rename $DRY "s|$2([^/]*)$|$3\$1|" {} \;
+}
+
+
+# Process the arguments.
+SRCTYPE=BCH
+TGTCASESDIR=/test/cases
+LIST=0
+DRY=
+USER=
+
+OPTIND=1 # Reset in case getopts has been used previously in the shell.
+
+while getopts "nlt:c:r:u:" opt; do
+    case "$opt" in
+	l)  LIST=1
+	    ;;
+	n)  DRY=-n
+	    ;;
+	t)  SRCTYPE=$OPTARG
+	    ;;
+	c)  TGTCASESDIR=$OPTARG
+	    ;;
+	u)  USER=$OPTARG
+	    ;;
+    esac
+done
+
+shift $((OPTIND-1))
+
+# Set a few variables.
+SRCCASESDIR=feops1:/srv/webdav/TAV/Verification/SystemVerification/testdata/$SRCTYPE
+[ "$USER" != "" ] && {
+    SRCCASESDIR=$USER@$SRCCASESDIR
+}
+
+SRCIDS=$(get_source_cases ${SRCCASESDIR//:/ })
+[ "$LIST" = "1" ] && {
+    # If the -l option is used, only list available source cases.
+    echo "The following source cases are available in $SRCCASESDIR:"
+    for srcid in $SRCIDS; do
+	echo "   $srcid"
+    done
+    exit
+}
+
+TASK=$1
+[ -n "$TASK" ] || { usage; exit 111; }
+if [[ $VALIDTASKS != *$TASK* ]]; then
+    echo "Task code '$TASK' is invalid. The following task codes are valid:"
+    echo "   $VALIDTASKS"
+    exit
+fi
+
+SRCID=$2
+[ -n "$SRCID" ] || { usage; exit 111; }
+if [[ $SRCIDS != *$SRCID* ]]; then
+    echo "Source case $SRCID not available in $SRCCASESDIR."
+    echo "Use the -l option to list available source cases."
+    exit
+fi
+
+TGTID=$3
+[ -n "$TGTID" ] || { usage; exit 111; }
+
+SRCCASEDIR=$SRCCASESDIR/$SRCID
+TGTCASEDIR=$TGTCASESDIR/$TGTID
+if [ ! -d "$TGTCASEDIR" ]; then
+    echo "Target case '$TGTID' was not found in target cases directory '$TGTCASESDIR'."
+    echo "Either set the correct target case ID or the correct target cases directory"
+    echo "using the -c option."
+    exit
+fi
+
+# Copy segmentation files.
+[ $TASK = "seg" ] && {
+    # Copy and rename all files in <CASEID>/segmentation directory.
+    rsync -avhP $SRCCASEDIR/segmentation/* $TGTCASEDIR/segmentation $DRY
+    echo "Renaming $SRCID to $TGTID for files in $TGTCASEDIR/segmentation"
+    rename_files_by_replace $TGTCASEDIR/segmentation $SRCID $TGTID
+}
