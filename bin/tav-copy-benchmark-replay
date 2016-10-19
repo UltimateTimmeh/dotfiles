@@ -8,67 +8,130 @@ VALIDTASKS="feapre feapreqc feapost feapostqc cfdpostqc"
 usage() {
     cat <<EOF
 
-Usage: $(basename $0) [options] TASK SRCCASEID TGTCASEID USER
+Usage: $(basename $0) [options] TASK SRCID TGTID
 
-Copy the replay file necessary for executing TASK of case TGTCASEID (which is
-an instance of case SRCCASEID) in TAVIguide-pp. The copying is done with rsync
-as USER. Assuming the user has access to the required task input files on the
-target machine, running this replay file in TAVIguide-pp will automatically
-simulate execution of the chosen task.
-
-The valid task codes are:
-   $VALIDTASKS
-
-Default source cases directory is:
-   feops1:/srv/webdav/TAV/Verification/SystemVerification/testdata/BCH
-
-Default target cases directory is:
-   /test/cases
-
-Default target replay file directory is:
-   ~/tavireplay
+Copy the replay file necessary for executing TASK of case TGTID (which is
+an instance of source case SRCID) in TAVIguide-pp.
 
 Options:
-  None
+  -n : Dry run. Only show what would happen, but don't actually do anything.
+  -l : List the available source cases.
+  -t SRCTYPE : Specify the type of source case.
+        The default source case type is 'BCH' (benchmark cases)
+        Other options for the source case type are:
+          - 'TAV' (production cases)
+          - 'TST' (test cases)
+        See 'feops1:/srv/webdav/TAV/Verification/SystemVerification/testdata'
+        for more direct access to the available source cases.
+  -c TGTCASESDIR : Target cases directory.
+        Also known in TAVIguide-pp as the cases_path where case TSTID can be
+        found.
+        The default target cases directory is:
+          - '/test/cases'
+  -r TGTREPLAYDIR : Target replay directory.
+        This is where the copied replay file will be placed.
+        The default target replay directory is:
+          - '~/tavireplay'
+  -u USER : Perform rsync operation as this user.
 
 Examples:
 
-1. Copying the replay file for executing the FEA preprocessing task of case
-   TST000000 (which is an instance of case BCH00CV26) as user 'feops':
+1. Listing all production source cases:
 
-     $ $(basename $0) feapre BCH00CV26 TST000000 feops
+     $ $(basename $0) -lt TAV
 
-   The replay file will be placed in the target replay file directory, and
-   will be named <TGTCASESDIR>-TST000000_feapre.py, where <TGTCASESDIR> is
-   the full target cases directory path with slashes replaced by dashes.
+2. Copying the replay file for executing the FEA preprocessing task of
+   case TST000321 (which is an instance of production source case TAV000123)
+   as user 'feops':
+
+     $ $(basename $0) -u feops -t TAV feapre TAV000123 TST000321
+
+   The selected replay file will be placed in TGTREPLAYDIR and will be named
+   <TGTCASESDIR>-TST000000_feapre.py, where <TGTCASESDIR> is TGTCASESDIR with
+   slashes replaced by dashes (this naming convention is used by the code in
+   the replay file to set the correct cases_path in TAVIguide-pp).
 
 EOF
 }
 
 
-# Make sure enough parameters were given.
-[ $# -ne 4 ] && { usage; exit 111; }
+get_source_cases() {
+    local SRCIDS
+    # Get source cases on machine $1, directory $2.
+    SRCIDS=$(ssh $1 "ls $2")
+    echo "$SRCIDS"
+}
+
+
+# Process the arguments.
+SRCTYPE=BCH
+TGTCASESDIR=/test/cases
+TGTREPLAYDIR=$HOME/tavireplay
+LIST=0
+DRY=
+USER=
+
+OPTIND=1 # Reset in case getopts has been used previously in the shell.
+
+while getopts "nlt:c:r:u:" opt; do
+    case "$opt" in
+	l)  LIST=1
+	    ;;
+	n)  DRY=-n
+	    ;;
+	t)  SRCTYPE=$OPTARG
+	    ;;
+	c)  TGTCASESDIR=$OPTARG
+	    ;;
+	r)  TGTREPLAYDIR=$OPTARG
+	    ;;
+	u)  USER=$OPTARG
+	    ;;
+    esac
+done
+
+shift $((OPTIND-1))
 
 # Set a few variables.
-DRY=
+SRCCASESDIR=feops1:/srv/webdav/TAV/Verification/SystemVerification/testdata/$SRCTYPE
+[ "$USER" != "" ] && {
+    SRCCASESDIR=$USER@$SRCCASESDIR
+}
+
+SRCIDS=$(get_source_cases ${SRCCASESDIR//:/ })
+[ "$LIST" = "1" ] && {
+    # If the -l option is used, only list available source cases.
+    echo "The following source cases are available in $SRCCASESDIR:"
+    for srcid in $SRCIDS; do
+	echo "   $srcid"
+    done
+    exit
+}
+
 TASK=$1
-SRCCASEID=$2
-TGTCASEID=$3
-USER=$4
-
-SRCCASESDIR=$4@feops1:/srv/webdav/TAV/Verification/SystemVerification/testdata/BCH
-SRCREPLAYDIR=$SRCCASESDIR/$SRCCASEID/replay
-SRCREPLAYFP=$SRCREPLAYDIR/$SRCCASEID\_replay.py
-
-TGTCASESDIR="/test/cases"
-TGTCASESALT=${TGTCASESDIR//'/'/'-'}
-TGTREPLAYDIR=$HOME/tavireplay
-TGTREPLAYFP=$TGTREPLAYDIR/$TGTCASESALT-$TGTCASEID\_$TASK.py
-
-# Copy the replay file if the given task is valid.
-if [[ $VALIDTASKS = *$TASK* ]]; then
-    rsync -avhP $SRCREPLAYFP $TGTREPLAYFP $DRY
+[ -n "$TASK" ] || { usage; exit 111; }
+if [[ $VALIDTASKS != *$TASK* ]]; then
+    echo "Task code '$TASK' is invalid. The following task codes are valid:"
+    echo "   $VALIDTASKS"
     exit
 fi
-echo "Task code '$TASK' is invalid. The following task codes are valid:"
-echo "  $VALIDTASKS"
+
+SRCID=$2
+[ -n "$SRCID" ] || { usage; exit 111; }
+if [[ $SRCIDS != *$SRCID* ]]; then
+    echo "Source case $SRCID not available in $SRCCASESDIR."
+    echo "Use the -l option to list available source cases."
+    exit
+fi
+
+TGTID=$3
+[ -n "$TGTID" ] || { usage; exit 111; }
+
+SRCREPLAYDIR=$SRCCASESDIR/$SRCID/replay
+SRCREPLAYFILE=$SRCREPLAYDIR/$SRCID\_replay.py
+
+TGTCASESALT=${TGTCASESDIR//'/'/'-'}
+TGTREPLAYFILE=$TGTREPLAYDIR/$TGTCASESALT-$TGTID\_$TASK.py
+
+# Copy the replay file.
+rsync -avhP $SRCREPLAYFILE $TGTREPLAYFILE $DRY
