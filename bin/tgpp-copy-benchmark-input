@@ -9,7 +9,7 @@ if [ $# -ne 4 ]; then
     exit
 fi
 
-BENCHROOT=$4"@feops1:/srv/webdav/TAV/Verification/SystemVerification/testdata/TST"
+BENCHROOT=$4"@feops1:/srv/webdav/TAV/Verification/SystemVerification/testdata/BCH"
 REPLAYROOT=$HOME"/tavireplay"
 TESTROOT="/test/cases"
 TESTROOTALT=${TESTROOT//'/'/'-'}
