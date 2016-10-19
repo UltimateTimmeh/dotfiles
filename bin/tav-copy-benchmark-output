@@ -1,0 +1,50 @@
+#!/bin/bash
+# Copy TAVIguide benchmark output files.
+
+# Functions
+
+
+rename_by_replace() {
+    # All files in directory $1 that have $2 in them are renamed by replacing $2 with $3.
+    find $1 -depth -name "$2[.-]*" -exec rename $DRY "s|$2([^/]*)$|$3\$1|" {} \;
+}
+
+
+# Make sure enough parameters were given.
+if [ $# -ne 4 ]; then
+    echo "Usage: tav-copy-benchmark-output TASK BENCHID TESTID USER"
+    echo "Copy the TAVIguide benchmark case output files necessary for completing TASK"
+    echo "of case TESTID, which is an instance of TAVIguide benchmark case BENCHID"
+    echo "as USER."
+    exit
+fi
+
+# Set a few variables.
+DRY=
+TASK=$1
+SRCCASEID=$2
+TGTCASEID=$3
+USER=$4
+
+VALIDTASKS="seg"
+
+SRCCASESDIR=$4@feops1:/srv/webdav/TAV/Verification/SystemVerification/testdata/BCH
+SRCCASEDIR=$SRCCASESDIR/$SRCCASEID
+
+TGTCASESDIR="/home/tim/cases"
+TGTCASEDIR=$TGTCASESDIR/$TGTCASEID
+
+# Make sure the given task is valid.
+if [[ $VALIDTASKS != *$TASK* ]]; then
+    echo "Task '$TASK' is invalid. The following tasks are valid:"
+    echo "  $VALIDTASKS"
+    exit
+fi
+
+# Copy segmentation files.
+[ $TASK = "seg" ] && {
+    # Copy and rename all files in <CASEID>/segmentation directory.
+    rsync -avhP $SRCCASEDIR/segmentation/* $TGTCASEDIR/segmentation $DRY
+    echo "Renaming $SRCCASEID to $TGTCASEID in $TGTCASEDIR/segmentation"
+    rename_by_replace $TGTCASEDIR/segmentation $SRCCASEID $TGTCASEID
+}

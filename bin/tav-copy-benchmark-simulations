@@ -1,5 +1,8 @@
 #!/bin/bash
-# Copy benchmark problem results back to myfeops cluster results folder.
+# Copy benchmark FEA and/or CFD results to the user's bumper/results directory.
+
+# Functions
+
 
 usage() {
     cat <<EOF

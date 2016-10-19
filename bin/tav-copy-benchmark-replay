@@ -1,0 +1,37 @@
+#!/bin/bash
+# Copy TAVIguide benchmark replay files.
+
+# Make sure enough parameters were given.
+if [ $# -ne 4 ]; then
+    echo "Usage: tav-copy-benchmark-replay TASK BENCHID TESTID USER"
+    echo "Copy the TAVIguide benchmark case replay file necessary for executing TASK"
+    echo "of case TESTID, which is an instance of TAVIguide benchmark case BENCHID"
+    echo "as USER."
+    exit
+fi
+
+# Set a few variables.
+DRY=
+TASK=$1
+SRCCASEID=$2
+TGTCASEID=$3
+USER=$4
+
+VALIDTASKS="feapre feapreqc feapost feapostqc cfdpostqc"
+
+SRCCASESDIR=$4@feops1:/srv/webdav/TAV/Verification/SystemVerification/testdata/BCH
+SRCREPLAYDIR=$SRCCASESDIR/$SRCCASEID/replay
+SRCREPLAYFP=$SRCREPLAYDIR/$SRCCASEID\_replay.py
+
+TGTCASESDIR="/test/cases"
+TGTCASESALT=${TGTCASESDIR//'/'/'-'}
+TGTREPLAYDIR=$HOME/tavireplay
+TGTREPLAYFP=$TGTREPLAYDIR/$TGTCASESALT-$TGTCASEID\_$TASK.py
+
+# Copy the replay file if the given task is valid.
+if [[ $VALIDTASKS = *$TASK* ]]; then
+    rsync -avhP $SRCREPLAYFP $TGTREPLAYFP $DRY
+    exit
+fi
+echo "Task '$TASK' is invalid. The following tasks are valid:"
+echo "  ${VALIDTASKS[@]}"
