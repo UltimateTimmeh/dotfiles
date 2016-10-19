@@ -67,11 +67,11 @@ EOF
 }
 
 
-get_source_cases() {
-    # Get source cases on machine $1, directory $2.
-    local SRCIDS
-    SRCIDS=$(ssh $1 "ls $2")
-    echo "$SRCIDS"
+remote_ls() {
+    # Do a remote ls for directory $2 on machine $1.
+    local CONTENTS
+    CONTENTS=$(ssh $1 "ls $2")
+    echo "$CONTENTS"
 }
 
 
@@ -110,12 +110,12 @@ SRCCASESDIR=feops1:/srv/webdav/TAV/Verification/SystemVerification/testdata/$SRC
     SRCCASESDIR=$USER@$SRCCASESDIR
 }
 
-SRCIDS=$(get_source_cases ${SRCCASESDIR//:/ })
+SRCIDS=$(remote_ls ${SRCCASESDIR//:/ })
 [ "$LIST" = "1" ] && {
     # If the -l option is used, only list available source cases.
     echo "The following source cases are available in $SRCCASESDIR:"
-    for srcid in $SRCIDS; do
-	echo "   $srcid"
+    for ID in $SRCIDS; do
+	echo "   $ID"
     done
     exit
 }

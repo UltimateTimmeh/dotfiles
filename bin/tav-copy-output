@@ -2,7 +2,7 @@
 # Copy TAVIguide-web task output files.
 
 # Functions
-VALIDTASKS="seg"
+VALIDTASKS="seg feapre feapreqc feapost"
 
 
 usage() {
@@ -12,7 +12,7 @@ Usage: $(basename $0) [options] TASK SRCID TGTID
 
 Copy the output files necessary for completing TASK of case TGTID (which is
 an instance of source case SRCID) in TAVIguide-web. TASK can be one of
-'seg'. The other tasks 'feapre', 'feapreqc', 'feapost', 'feapostqc' and 
+'seg', 'feapre', 'feapreqc', 'feapost'. The other tasks 'feapostqc' and 
 'cfdpostqc' are coming but are not yet implemented.
 
 Options:
@@ -63,17 +63,18 @@ EOF
 }
 
 
-get_source_cases() {
-    # Get source cases on machine $1, directory $2.
-    local SRCIDS
-    SRCIDS=$(ssh $1 "ls $2")
-    echo "$SRCIDS"
+remote_ls() {
+    # Do a remote ls for directory $2 on machine $1.
+    local CONTENTS
+    CONTENTS=$(ssh $1 "ls $2")
+    echo "$CONTENTS"
 }
 
 
 rename_files_by_replace() {
-    # All files in directory $1 that have $2 in them are renamed by replacing $2 with $3.
-    find $1 -depth -name "$2[.-]*" -exec rename $DRY "s|$2([^/]*)$|$3\$1|" {} \;
+    # All files in directory $1 (and subdirectories) that have $2 in them are
+    # renamed by replacing $2 with $3.
+    find $1 -depth -type f -name "$2[.-]*" -exec rename $DRY "s|$2([^/]*)$|$3\$1|" {} \;
 }
 
 
@@ -109,12 +110,12 @@ SRCCASESDIR=feops1:/srv/webdav/TAV/Verification/SystemVerification/testdata/$SRC
     SRCCASESDIR=$USER@$SRCCASESDIR
 }
 
-SRCIDS=$(get_source_cases ${SRCCASESDIR//:/ })
+SRCIDS=$(remote_ls ${SRCCASESDIR//:/ })
 [ "$LIST" = "1" ] && {
     # If the -l option is used, only list available source cases.
     echo "The following source cases are available in $SRCCASESDIR:"
-    for srcid in $SRCIDS; do
-	echo "   $srcid"
+    for ID in $SRCIDS; do
+	echo "   $ID"
     done
     exit
 }
@@ -147,10 +148,45 @@ if [ ! -d "$TGTCASEDIR" ]; then
     exit
 fi
 
-# Copy segmentation files.
+SRCSIMDIR=$SRCCASEDIR/simulations
+SRCSIMS=$(remote_ls ${SRCSIMDIR//:/ })
+TGTSIMDIR=$TGTCASEDIR/simulations
+echo "Simulations for source case '$SRCID':"
+for SRCSIM in $SRCSIMS; do
+    echo "    $SRCSIM"
+done
+
+# Copy files depending on selected task.
 [ $TASK = "seg" ] && {
-    # Copy and rename all files in <CASEID>/segmentation directory.
+    echo "Copy source case's Segmentation output."
     rsync -avhP $SRCCASEDIR/segmentation/* $TGTCASEDIR/segmentation $DRY
-    echo "Renaming $SRCID to $TGTID for files in $TGTCASEDIR/segmentation"
-    rename_files_by_replace $TGTCASEDIR/segmentation $SRCID $TGTID
 }
+
+[ $TASK = "feapre" ] && {
+    echo "Copy source case's FEA Preprocessing output."
+    rsync -avhP $SRCCASEDIR/$SRCID-project.pyf $SRCCASEDIR/$SRCID.log $TGTCASEDIR $DRY
+    rsync -avhP $SRCCASEDIR/preprocessing/* $TGTCASEDIR/preprocessing $DRY
+}
+
+[ $TASK = "feapreqc" ] && {
+    echo "Copy source case's FEA Preprocessing QC output."
+    for SRCSIM in $SRCSIMS; do
+	TGTSIM=${SRCSIM//$SRCID/$TGTID}
+	rsync -avhP $SRCSIMDIR/$SRCSIM/* --include "*.inp" --include "*.request" --exclude "*" $TGTSIMDIR/$TGTSIM $DRY
+    done
+}
+
+[ $TASK = "feapost" ] && {
+    echo "Copy source case's FEA Postprocessing output."
+    for SRCSIM in $SRCSIMS; do
+	TGTSIM=${SRCSIM//$SRCID/$TGTID}
+	rsync -avhP $SRCSIMDIR/$SRCSIM/* --include "*slicing.pgf" --include "*slicing.csv" --include "*measurements.csv" --include "*outputfea.csv" --exclude "*" $TGTSIMDIR/$TGTSIM $DRY
+	rsync -avhP $SRCSIMDIR/$SRCSIM/common/* --exclude "*-box.pgf.gz" --include "*" $TGTSIMDIR/$TGTSIM/common $DRY
+	rsync -avhP $SRCSIMDIR/$SRCSIM/aligned/* --exclude "*.png" --exclude "*-streamlines.pgf.gz" --include "*" $TGTSIMDIR/$TGTSIM/aligned $DRY
+	rsync -avhP $SRCSIMDIR/$SRCSIM/misaligned/* --exclude "*.png" --exclude "*-streamlines.pgf.gz" --include "*" $TGTSIMDIR/$TGTSIM/misaligned $DRY
+    done
+}
+
+# Rename files.
+echo "Rename $SRCID to $TGTID for files in $TGTCASEDIR."
+rename_files_by_replace $TGTCASEDIR $SRCID $TGTID
