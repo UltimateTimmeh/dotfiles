@@ -1,14 +1,53 @@
 #!/bin/bash
 # Copy TAVIguide benchmark replay files.
 
+# Functions
+VALIDTASKS="feapre feapreqc feapost feapostqc cfdpostqc"
+
+
+usage() {
+    cat <<EOF
+
+Usage: $(basename $0) [options] TASK SRCCASEID TGTCASEID USER
+
+Copy the replay file necessary for executing TASK of case TGTCASEID (which is
+an instance of case SRCCASEID) in TAVIguide-pp. The copying is done with rsync
+as USER. Assuming the user has access to the required task input files on the
+target machine, running this replay file in TAVIguide-pp will automatically
+simulate execution of the chosen task.
+
+The valid task codes are:
+   $VALIDTASKS
+
+Default source cases directory is:
+   feops1:/srv/webdav/TAV/Verification/SystemVerification/testdata/BCH
+
+Default target cases directory is:
+   /test/cases
+
+Default target replay file directory is:
+   ~/tavireplay
+
+Options:
+  None
+
+Examples:
+
+1. Copying the replay file for executing the FEA preprocessing task of case
+   TST000000 (which is an instance of case BCH00CV26) as user 'feops':
+
+     $ $(basename $0) feapre BCH00CV26 TST000000 feops
+
+   The replay file will be placed in the target replay file directory, and
+   will be named <TGTCASESDIR>-TST000000_feapre.py, where <TGTCASESDIR> is
+   the full target cases directory path with slashes replaced by dashes.
+
+EOF
+}
+
+
 # Make sure enough parameters were given.
-if [ $# -ne 4 ]; then
-    echo "Usage: tav-copy-benchmark-replay TASK BENCHID TESTID USER"
-    echo "Copy the TAVIguide benchmark case replay file necessary for executing TASK"
-    echo "of case TESTID, which is an instance of TAVIguide benchmark case BENCHID"
-    echo "as USER."
-    exit
-fi
+[ $# -ne 4 ] && { usage; exit 111; }
 
 # Set a few variables.
 DRY=
@@ -16,8 +55,6 @@ TASK=$1
 SRCCASEID=$2
 TGTCASEID=$3
 USER=$4
-
-VALIDTASKS="feapre feapreqc feapost feapostqc cfdpostqc"
 
 SRCCASESDIR=$4@feops1:/srv/webdav/TAV/Verification/SystemVerification/testdata/BCH
 SRCREPLAYDIR=$SRCCASESDIR/$SRCCASEID/replay
@@ -33,5 +70,5 @@ if [[ $VALIDTASKS = *$TASK* ]]; then
     rsync -avhP $SRCREPLAYFP $TGTREPLAYFP $DRY
     exit
 fi
-echo "Task '$TASK' is invalid. The following tasks are valid:"
-echo "  ${VALIDTASKS[@]}"
+echo "Task code '$TASK' is invalid. The following task codes are valid:"
+echo "  $VALIDTASKS"

@@ -31,7 +31,7 @@ VALIDTASKS="seg"
 SRCCASESDIR=$4@feops1:/srv/webdav/TAV/Verification/SystemVerification/testdata/BCH
 SRCCASEDIR=$SRCCASESDIR/$SRCCASEID
 
-TGTCASESDIR="/home/tim/cases"
+TGTCASESDIR="test/cases"
 TGTCASEDIR=$TGTCASESDIR/$TGTCASEID
 
 # Make sure the given task is valid.

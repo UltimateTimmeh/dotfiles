@@ -33,7 +33,14 @@ Options:
 
 Examples:
 
-1. Copying the CFD results of benchmark case BCH00LT25 to the user's
+1. Listing the available benchmark cases in directory /home/user/benchmark:
+
+     $ $(basename $0) -lb /home/user/benchmark
+
+   This actually works by simply listing all files in the given directory, so
+   this does not necessarily only list valid benchmark cases.
+
+2. Copying the CFD results of benchmark case BCH00LT25 to the user's
    bumper/results directory, renaming the copied files to case ID
    TST000123 and creating .done files in the user's bumper/requests
    directory:
@@ -42,13 +49,6 @@ Examples:
   
    Actually, the above command only simulates these actions. Remove the -n
    option to really do it.
-
-2. Listing the available benchmark cases in directory /home/user/benchmark:
-
-     $ $(basename $0) -lb /home/user/benchmark
-
-   This actually works by simply listing all files in the given directory, so
-   this does not necessarily only list valid benchmark cases.
 
 3. Typical copyback during TAVIguide testing will be done with the following
    two commands, for FEA and CFD respectively:
