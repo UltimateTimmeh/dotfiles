@@ -1,5 +1,6 @@
 #!/bin/bash
 # Copy TAVIguide-pp task replay files.
+# v1.0
 
 # Functions
 
@@ -22,8 +23,7 @@ Options:
         Other options for the source case type are:
           - 'TAV' (production cases)
           - 'TST' (test cases)
-        Go to 'feops1:/srv/webdav/TAV/Verification/SystemVerification/testdata'
-        for more direct access to the available source cases.
+        See section 'Source cases' for more info.
   -c TGTCASESDIR : Target cases directory.
         Also known in TAVIguide-pp as the cases_path where case TSTID can be
         found.
