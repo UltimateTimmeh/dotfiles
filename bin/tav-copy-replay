@@ -2,7 +2,6 @@
 # Copy TAVIguide-pp task replay files.
 
 # Functions
-VALIDTASKS="feapre feapreqc feapost feapostqc cfdpostqc"
 
 
 usage() {
@@ -67,6 +66,14 @@ EOF
 }
 
 
+element_not_in() {
+    # Test if element $1 is not in array ${@:2}.
+    local e
+    for e in "${@:2}"; do [[ "$e" == "$1" ]] && return 1; done
+    return 0
+}
+
+
 remote_ls() {
     # Do a remote ls for directory $2 on machine $1.
     local CONTENTS
@@ -113,25 +120,27 @@ SRCCASESDIR=feops1:/srv/webdav/TAV/Verification/SystemVerification/testdata/$SRC
 SRCIDS=$(remote_ls ${SRCCASESDIR//:/ })
 [ "$LIST" = "1" ] && {
     # If the -l option is used, only list available source cases.
-    echo "The following source cases are available in $SRCCASESDIR:"
+    echo "The following source cases are available in '$SRCCASESDIR':"
     for ID in $SRCIDS; do
 	echo "   $ID"
     done
     exit
 }
 
+VALIDTASKS=("feapre" "feapreqc" "feapost" "feapostqc" "cfdpostqc")
 TASK=$1
 [ -n "$TASK" ] || { usage; exit 111; }
-if [[ $VALIDTASKS != *$TASK* ]]; then
+if element_not_in "$TASK" "${VALIDTASKS[@]}"; then
     echo "Task code '$TASK' is invalid. The following task codes are valid:"
-    echo "   $VALIDTASKS"
+    echo "   ${VALIDTASKS[@]}"
     exit
 fi
 
+SRCIDS=($SRCIDS)
 SRCID=$2
 [ -n "$SRCID" ] || { usage; exit 111; }
-if [[ $SRCIDS != *$SRCID* ]]; then
-    echo "Source case $SRCID not available in $SRCCASESDIR."
+if element_not_in "$SRCID" "${SRCIDS[@]}"; then
+    echo "Source case '$SRCID' not available in '$SRCCASESDIR'."
     echo "Use the -l option to list available source cases."
     exit
 fi
