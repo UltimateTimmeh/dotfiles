@@ -9,6 +9,9 @@
 # Add $HOME/bin to PATH
 export PATH=$PATH:$HOME/bin
 
+# Add $HOME/.gitscripts/bin to PATH
+export PATH=$PATH:$HOME/.gitscripts/bin
+
 # Set a fancy primary prompt
 export PS1='${debian_chroot:+($debian_chroot)}\[\033[01;31m\]\u@\h \[\033[01;32m\]<\d - \t> \[\033[01;34m\][\w]\n\$ \[\033[00m\]'
 
