@@ -19,16 +19,16 @@ Options:
   -n : Dry run. Only show what would happen, but don't actually do anything.
   -l : List the available source cases.
   -t SRCTYPE : Specify the type of source case.
-        The default source case type is 'BCH' (benchmark cases)
-        Other options for the source case type are:
-          - 'TAV' (production cases)
-          - 'TST' (test cases)
-        See section 'Source cases' for more info.
+       The default source case type is 'BCH' (benchmark cases)
+       Other options for the source case type are:
+         - 'TAV' (production cases)
+         - 'TST' (test cases)
+       See section 'Source cases' for more info.
   -c TGTCASESDIR : Target cases directory.
-        Also known in TAVIguide-pp as the cases_path where case TSTID can be
-        found.
-        The default target cases directory is:
-          - '/test/cases'
+       Also known in TAVIguide-pp as the cases_path where case TSTID can be
+       found.
+       The default target cases directory is:
+         - '/test/cases'
   -u USER : Perform ssh and rsync operation(s) as this user.
 
 Source cases:
@@ -53,9 +53,15 @@ Examples:
 
        $ $(basename $0) -u feops -t TAV seg TAV000123 TST000321
 
-     The output files for the selected task will be placed in the correct
-     location in TGTCASESDIR. All copied directories and files with SRCID in
-     their name will then be renamed by replacing SRCID with TGTID.
+  3. Typical copying of benchmark case output during TAVIguide testing will
+     be done with the following task-specific commands:
+
+       Segmentation          : $ $(basename $0) seg BENCHID TESTID
+       FEA Preprocessing     : $ $(basename $0) feapre BENCHID TESTID
+       FEA Preprocessing  QC : $ $(basename $0) feapreqc BENCHID TESTID
+       FEA Postprocessing    : $ $(basename $0) feapost BENCHID TESTID
+       FEA Postprocessing QC : $ $(basename $0) feapostqc BENCHID TESTID
+       CFD Postprocessing QC : $ $(basename $0) cfdpostqc BENCHID TESTID
 
 EOF
 }
@@ -85,15 +91,15 @@ rename_files_by_replace() {
 
 
 # Process the arguments.
-SRCTYPE=BCH
-TGTCASESDIR=/test/cases
 LIST=0
 DRY=
+SRCTYPE=BCH
+TGTCASESDIR=/test/cases
 USER=
 
 OPTIND=1 # Reset in case getopts has been used previously in the shell.
 
-while getopts "nlt:c:r:u:" opt; do
+while getopts "lnt:c:u:" opt; do
     case "$opt" in
 	l)  LIST=1
 	    ;;
@@ -165,18 +171,18 @@ for SRCSIM in $SRCSIMS; do
 done
 
 # Copy files depending on selected task.
-[ $TASK = "seg" ] && {
+[ "$TASK" = "seg" ] && {
     echo "Copy source case's Segmentation output."
     rsync -avhP $SRCCASEDIR/segmentation/* $TGTCASEDIR/segmentation $DRY
 }
 
-[ $TASK = "feapre" ] && {
+[ "$TASK" = "feapre" ] && {
     echo "Copy source case's FEA Preprocessing output."
     rsync -avhP $SRCCASEDIR/$SRCID-project.pyf $SRCCASEDIR/$SRCID.log $TGTCASEDIR $DRY
     rsync -avhP $SRCCASEDIR/preprocessing/* $TGTCASEDIR/preprocessing $DRY
 }
 
-[ $TASK = "feapreqc" ] && {
+[ "$TASK" = "feapreqc" ] && {
     echo "Copy source case's FEA Preprocessing QC output."
     for SRCSIM in $SRCSIMS; do
 	TGTSIM=${SRCSIM//$SRCID/$TGTID}
@@ -184,7 +190,7 @@ done
     done
 }
 
-[ $TASK = "feapost" ] && {
+[ "$TASK" = "feapost" ] && {
     echo "Copy source case's FEA Postprocessing output."
     for SRCSIM in $SRCSIMS; do
 	TGTSIM=${SRCSIM//$SRCID/$TGTID}
@@ -195,7 +201,7 @@ done
     done
 }
 
-[ $TASK = "feapostqc" ] && {
+[ "$TASK" = "feapostqc" ] && {
     echo "Copy source case's FEA Postprocessing QC output."
     for SRCSIM in $SRCSIMS; do
 	TGTSIM=${SRCSIM//$SRCID/$TGTID}
@@ -203,7 +209,7 @@ done
     done
 }
 
-[ $TASK = "cfdpostqc" ] && {
+[ "$TASK" = "cfdpostqc" ] && {
     echo "Copy source case's CFD Postprocessing QC output."
     for SRCSIM in $SRCSIMS; do
 	TGTSIM=${SRCSIM//$SRCID/$TGTID}
@@ -217,3 +223,5 @@ done
 # Rename files.
 echo "Rename '$SRCID' to '$TGTID' for files in '$TGTCASEDIR'."
 rename_files_by_replace $TGTCASEDIR $SRCID $TGTID
+
+# End

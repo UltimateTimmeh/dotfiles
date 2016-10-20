@@ -19,20 +19,20 @@ Options:
   -n : Dry run. Only show what would happen, but don't actually do anything.
   -l : List the available source cases.
   -t SRCTYPE : Specify the type of source case.
-        The default source case type is 'BCH' (benchmark cases)
-        Other options for the source case type are:
-          - 'TAV' (production cases)
-          - 'TST' (test cases)
-        See section 'Source cases' for more info.
+       The default source case type is 'BCH' (benchmark cases)
+       Other options for the source case type are:
+         - 'TAV' (production cases)
+         - 'TST' (test cases)
+       See section 'Source cases' for more info.
   -c TGTCASESDIR : Target cases directory.
-        Also known in TAVIguide-pp as the cases_path where case TSTID can be
-        found.
-        The default target cases directory is:
-          - '/test/cases'
+       Also known in TAVIguide-pp as the cases_path where case TSTID can be
+       found.
+       The default target cases directory is:
+         - '/test/cases'
   -r TGTREPLAYDIR : Target replay directory.
-        This is where the copied replay file will be placed.
-        The default target replay directory is:
-          - '~/tavireplay'
+       This is where the copied replay file will be placed.
+       The default target replay directory is:
+         - '~/tavireplay'
   -u USER : Perform ssh and rsync operation(s) as this user.
 
 Source cases:
@@ -57,10 +57,14 @@ Examples:
 
        $ $(basename $0) -u feops -t TAV feapre TAV000123 TST000321
 
-     The selected replay file will be placed in TGTREPLAYDIR and will be named
-     <TGTCASESDIR>-TST000000_feapre.py, where <TGTCASESDIR> is TGTCASESDIR with
-     slashes replaced by dashes (this naming convention is used by the code in
-     the replay file to set the correct cases_path in TAVIguide-pp).
+  3. Typical copying of benchmark case replay files during TAVIguide testing
+     will be done with the following task-specific commands:
+
+       FEA Preprocessing     : $ $(basename $0) feapre BENCHID TESTID
+       FEA Preprocessing  QC : $ $(basename $0) feapreqc BENCHID TESTID
+       FEA Postprocessing    : $ $(basename $0) feapost BENCHID TESTID
+       FEA Postprocessing QC : $ $(basename $0) feapostqc BENCHID TESTID
+       CFD Postprocessing QC : $ $(basename $0) cfdpostqc BENCHID TESTID
 
 EOF
 }
@@ -83,20 +87,20 @@ remote_ls() {
 
 
 # Process the arguments.
+DRY=
+LIST=0
 SRCTYPE=BCH
 TGTCASESDIR=/test/cases
 TGTREPLAYDIR=$HOME/tavireplay
-LIST=0
-DRY=
 USER=
 
 OPTIND=1 # Reset in case getopts has been used previously in the shell.
 
 while getopts "nlt:c:r:u:" opt; do
     case "$opt" in
-	l)  LIST=1
-	    ;;
 	n)  DRY=-n
+	    ;;
+	l)  LIST=1
 	    ;;
 	t)  SRCTYPE=$OPTARG
 	    ;;
@@ -149,10 +153,12 @@ TGTID=$3
 [ -n "$TGTID" ] || { usage; exit 111; }
 
 SRCREPLAYDIR=$SRCCASESDIR/$SRCID/replay
-SRCREPLAYFILE=$SRCREPLAYDIR/$SRCID\_replay.py
+SRCREPLAYFILE=$SRCREPLAYDIR/${SRCID}_replay.py
 
 TGTCASESALT=${TGTCASESDIR//'/'/'-'}
-TGTREPLAYFILE=$TGTREPLAYDIR/$TGTCASESALT-$TGTID\_$TASK.py
+TGTREPLAYFILE=$TGTREPLAYDIR/$TGTCASESALT-${TGTID}_$TASK.py
 
 # Copy the replay file.
 rsync -avhP $SRCREPLAYFILE $TGTREPLAYFILE $DRY
+
+# End
