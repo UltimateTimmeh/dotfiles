@@ -67,4 +67,4 @@ alias pysea='pyformex --search --'
 
 # Mount TAVIguide research case directory with sshfs
 alias mount-tgrc='sshfs tim@feops1:/home/taviguide/cases /mnt/taviguide-research-cases -C -o allow_other'
-alias mount-ttd='sshfs tim@feops1:/srv/webdav/TAV/Verification/SystemVerification/testdata /mnt/tav-testdata -C -o allow_other'
+alias mount-ttd='sshfs tim@kong:/mnt/shared/webdav/TAV/Verification/SystemVerification/testdata /mnt/tav-testdata -C -o allow_other'
