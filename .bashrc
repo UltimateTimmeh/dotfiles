@@ -66,5 +66,6 @@ alias pyformex='/home/tim/Documents/pyformex/pyformex/pyformex --redirect --pysi
 alias pysea='pyformex --search --'
 
 # Mount TAVIguide research case directory with sshfs
-alias mount-tgrc='sshfs tim@feops1:/home/taviguide/cases /mnt/taviguide-research-cases -C -o allow_other'
-alias mount-ttd='sshfs tim@kong:/mnt/shared/webdav/TAV/Verification/SystemVerification/testdata /mnt/tav-testdata -C -o allow_other'
+alias mount-webdav='sshfs net.feops.com:/mnt/shared/webdav /mnt/webdav -C -o allow_other'
+alias mount-cluster='sshfs net.feops.com:bumper /mnt/cluster -C -o allow_other; sshfs net.feops.com:/mnt/running/tim /mnt/running/tim -C -o allow_other'
+alias mount-tgr='sshfs net.feops.com:/mnt/shared/taviguide/cases /mnt/tgr -C -o allow_other'
