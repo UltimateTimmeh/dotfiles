@@ -20,3 +20,9 @@
  ;; Default frame size at startup.
 (add-to-list 'default-frame-alist '(height . 51))
 (add-to-list 'default-frame-alist '(width . 101))
+
+ ;; Save backup files in a custom directory.
+(setq backup-directory-alist '(("." . "~/.emacsbak")))
+
+ ;; Show column number.
+(setq column-number-mode t)
