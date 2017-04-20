@@ -20,10 +20,17 @@ install_symlink_to() {
 }
 
 # General function for installing a git repository.
+# Permission is asked first.
 # Repositories are only cloned if the target doesn't exist.
 install_git_repo() {
-  if [ ! -e "$2" ]; then
-    git clone "$1" "$2"
+  read -rn 1 -p "Install $1? [y/N]: "
+  if [ ! -z "$REPLY" ]; then  # No blank line after ENTER.
+    echo
+  fi
+  if [[ "${REPLY,,}" == y* ]]; then
+    if [ ! -e "$3" ]; then
+      git clone "$2" "$3"
+    fi
   fi
 }
 
@@ -31,17 +38,17 @@ install_git_repo() {
 REP="bumps:/srv/git/pyformex.git"
 TGT="$HOME/Documents/pyformex"
 CFG=".config/pyformex/pyformex.conf"
-install_git_repo "$REP" "$TGT"
+install_git_repo "pyFormex" "$REP" "$TGT"
 install_symlink_to "$CFG"
 
 # Install TAVIguide-pp and its config.
 REP="https://net.feops.com/gitlab/feops/TAVIguide-pp.git"
 TGT="$HOME/Documents/feops/taviguide/taviguide-pp"
 CFG=".config/pyformex/taviguide.conf"
-install_git_repo "$REP" "$TGT"
+install_git_repo "TAVIguide-pp" "$REP" "$TGT"
 install_symlink_to "$CFG"
 
 # Install MITRALguide-pp.
 REP="https://net.feops.com/gitlab/feops/MITRALguide-pp.git"
 TGT="$HOME/Documents/feops/mitralguide/mitralguide-pp"
-install_git_repo "$REP" "$TGT"
+install_git_repo "MITRALguide-pp" "$REP" "$TGT"

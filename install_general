@@ -19,6 +19,29 @@ install_symlink_to() {
   ln -sfv "$TARGET" "$LINKNAME"
 }
 
+# Install a package from the distro repositories.
+install_apt() {
+  read -rn 1 -p "Install $1? [y/N]: "
+  if [ ! -z "$REPLY" ]; then  # No blank line after ENTER.
+    echo
+  fi
+  if [[ "${REPLY,,}" == y* ]]; then
+    sudo apt-get install "$1"
+  fi
+}
+
+# Download and install a .deb file.
+download_and_install_deb() {
+  read -rn 1 -p "Install $1? [y/N]: "
+  if [ ! -z "$REPLY" ]; then  # No blank line after ENTER.
+    echo
+  fi
+  if [[ "${REPLY,,}" == y* ]]; then
+    wget -P "/tmp" "$2"
+    sudo dpkg -i "/tmp/$(basename $2)"
+  fi
+}
+
 # Install bashrc.
 install_symlink_to ".bashrc"
 install_symlink_to ".bash_aliases"
@@ -34,14 +57,13 @@ install_symlink_to ".config/xfce4/terminal/terminalrc"
 install_symlink_to ".gitconfig"
 
 # Install Emacs24 and its config and theme.
-sudo apt-get install "emacs24"
+install_apt "emacs24"
 install_symlink_to ".emacs"
 install_symlink_to ".emacs.d/themes/ample-zen-theme.el"
 
 # Install Sublime Text 3 and its config and user commands.
 URL="https://download.sublimetext.com/sublime-text_build-3126_amd64.deb"
-wget -P "/tmp" "$URL"
-sudo dpkg -i "/tmp/sublime-text_build-3126_amd64.deb"
+download_and_install_deb "Sublime Text 3" "$URL"
 CFGDIR=".config/sublime-text-3/Packages/User"
 install_symlink_to "$CFGDIR/Anaconda.sublime-settings"
 install_symlink_to "$CFGDIR/Default (Linux).sublime-keymap"
