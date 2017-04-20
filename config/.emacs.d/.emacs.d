@@ -1,1 +1,0 @@
-/home/tim/.dotfiles/config/.emacs.d

@@ -4,12 +4,19 @@
 DOTFILES_DIR="$(dirname "$(pwd)/$0")"
 
 # General function for symlinking config files or directories.
-# Symlinks overwrite existing files.
+# If LINKNAME exists, it is backed up (with datetime appended) to ~/.dotfilesbak.
 install_symlink_to() {
-  SRC="$DOTFILES_DIR/config/$1"
-  TGT="$HOME/$1"
-  mkdir -pv "$(dirname "$TGT")"
-  ln -sfv "$SRC" "$TGT"
+  TARGET="$DOTFILES_DIR/config/$1"
+  LINKNAME="$HOME/$1"
+  if [ -e "$LINKNAME" ]; then
+    BAKDIR="$HOME/.dotfilesbak"
+    BASENAME="$(basename $LINKNAME)"
+    DATETIME="$(date +%Y%m%d%H%M%S)"
+    mkdir -pv "$BAKDIR"
+    mv -v "$LINKNAME" "$BAKDIR/$BASENAME-$DATETIME"
+  fi
+  mkdir -pv "$(dirname "$LINKNAME")"
+  ln -sfv "$TARGET" "$LINKNAME"
 }
 
 # General function for installing a git repository.

@@ -9,3 +9,5 @@ My personal dotfiles repository.
 - Add Makefile with install target.
 - Add list of custom system keyboard shortcuts.
 - Add MITRALguide-pp and new TAVIguide-pp config files.
+- Move the `install_symlink_to` function (and others) to a general location.
+- Improve backup so files with the same name don't overwrite each other.
