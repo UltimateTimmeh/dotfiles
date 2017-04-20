@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+
+BAKDIR="$HOME/.dotfilesbak"
+read -rn 1 -p "Remove backup directory '$BAKDIR'? [y/N]: "
+if [ ! -z "$REPLY" ]; then  # No blank line after ENTER.
+  echo
+fi
+if [[ "${REPLY,,}" == y* ]]; then
+  rm -rvf "$BAKDIR"
+fi
