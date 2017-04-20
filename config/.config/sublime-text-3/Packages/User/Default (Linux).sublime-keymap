@@ -1,0 +1,10 @@
+[
+  {
+    "keys": ["ctrl+alt+w"],
+    "command": "close_workspace",
+  },
+  {
+    "keys": ["ctrl+k", "ctrl+s"],
+    "command": "show_keyboard_shortcuts",
+  },
+]

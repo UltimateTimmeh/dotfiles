@@ -7,3 +7,7 @@
 *.#*
 *.log
 *.out
+
+# xfce4-terminal accelerator map dump
+#####################################
+*.scm

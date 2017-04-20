@@ -1,0 +1,6 @@
+# Set a fancy primary prompt
+export PS1="${debian_chroot:+($debian_chroot)}\[\033[01;31m\]\u@\h \[\033[01;32m\]<\d - \t> \[\033[01;34m\][\w]\n\$ \[\033[00m\]"
+
+# Use 256 colors in the terminal emulator.
+# This makes the appearance of emacs in the terminal much fancier.
+export TERM=xterm-256color
