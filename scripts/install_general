@@ -25,6 +25,9 @@ install_apt "mlocate" "mlocate"
 install_apt "gitk" "git gitk"
 install_symlink_to ".gitconfig"
 
+# Install PulseAudio.
+install_apt "PulseAudio" "pulseaudio pavucontrol"
+
 # Install PCManFM.
 install_apt "PCManFM" "pcmanfm"
 install_symlink_to ".config/pcmanfm/default/pcmanfm.conf"
@@ -46,8 +49,9 @@ install_symlink_to "$USERDIR/Python.sublime-settings"
 install_symlink_to "$USERDIR/SublimeLinter.sublime-settings"
 install_symlink_to "$USERDIR/show_keyboard_shortcuts.py"
 
-# Install PulseAudio.
-install_apt "PulseAudio" "pulseaudio pavucontrol"
+# Install Google Chrome.
+URL="https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb"
+download_and_install_deb "Google Chrome" "$URL"
 
 # Install Thunderbird.
 install_apt "Thunderbird" "thunderbird lightning calendar-google-provider"

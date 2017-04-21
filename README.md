@@ -37,17 +37,19 @@ This procedure currently installs the following software (of course always askin
 - gitk: Graphical visualizer for Git repositories. Installed with the package
   manager (git gitk). **Note:** Also installs Git, if for some reason this is
   not yet installed.
+- PulseAudio: Better sound input/output/volume control. Installed with the
+  package manager (pulseaudio pavucontrol).
 - PCManFM: Better file manager than Thunar. Installed with the package manager
   (pcmanfm). **Note:** Bind this package to 'Ctrl+Alt+F' for easy access.
 - Emacs 24: For when a proper terminal text editor is needed. Installed with
   the package manager (emacs24).
 - Sublime Text 3: For all the main programming and text editing tasks.
-  Installed from the .deb file downloaded from Sublime Text's official website.
+  Installed from the official .deb file downloaded from Sublime Text's website.
   **Note:** Packages are not yet automatically installed, but the 'User' config
   directory in the dotfiles repository contains a list. **Note:** Bind this
   package to 'Ctrl+Alt+S' for easy access.
-- PulseAudio: Better sound input/output/volume control. Installed with the
-  package manager (pulseaudio pavucontrol).
+- Google Chrome: My preferred web browser. Installed from the official .deb
+  file downloaded from Google's website.
 - Thunderbird: Mail client. Installed with the package manager (thunderbird
   lightning calendar-google-provider).
 - LibreOffice: The poor man's Office suite. Installed with the package
@@ -97,5 +99,4 @@ This procedure currently installs the following software (of course always askin
 - Add instructions for setting the behavior of the 'PgUp' key in the terminal.
 - Add more automatic software installations:
 
-  - google-chrome
   - pyformex extras
