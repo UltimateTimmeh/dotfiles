@@ -1,0 +1,59 @@
+#!/usr/bin/env bash
+
+# Get dotfiles config directory.
+SCRIPTSDIR="$(dirname "$(pwd)/$0")"
+CFGDIR="$(realpath "$SCRIPTSDIR/../config")"
+
+# Create a symlink to a config file.
+# If link name exists, it is backed up (with datetime) to ~/.dotfilesbak.
+install_symlink_to() {
+  TARGET="$CFGDIR/$1"
+  echo $TARGET
+  LINKNAME="$HOME/$1"
+  if [ -e "$LINKNAME" ]; then
+    BAKDIR="$HOME/.dotfilesbak"
+    BASENAME="$(basename $LINKNAME)"
+    DATETIME="$(date +%Y%m%d%H%M%S)"
+    mkdir -pv "$BAKDIR"
+    mv -v "$LINKNAME" "$BAKDIR/$BASENAME-$DATETIME"
+  fi
+  mkdir -pv "$(dirname "$LINKNAME")"
+  ln -sfv "$TARGET" "$LINKNAME"
+}
+
+# Install a package from the distro repositories.
+install_apt() {
+  read -rn 1 -p "Install $1? [y/N]: "
+  if [ ! -z "$REPLY" ]; then  # No blank line after ENTER.
+    echo
+  fi
+  if [[ "${REPLY,,}" == y* ]]; then
+    sudo apt-get install "$1"
+  fi
+}
+
+# Download and install a .deb file.
+download_and_install_deb() {
+  read -rn 1 -p "Install $1? [y/N]: "
+  if [ ! -z "$REPLY" ]; then  # No blank line after ENTER.
+    echo
+  fi
+  if [[ "${REPLY,,}" == y* ]]; then
+    wget -P "/tmp" "$2"
+    sudo dpkg -i "/tmp/$(basename $2)"
+  fi
+}
+
+# Clone a GIT repository.
+# Repositories are only cloned if the target doesn't exist.
+install_git_repo() {
+  read -rn 1 -p "Install $1? [y/N]: "
+  if [ ! -z "$REPLY" ]; then  # No blank line after ENTER.
+    echo
+  fi
+  if [[ "${REPLY,,}" == y* ]]; then
+    if [ ! -e "$3" ]; then
+      git clone "$2" "$3"
+    fi
+  fi
+}

@@ -1,0 +1,24 @@
+#!/usr/bin/env bash
+
+# Source utility functions.
+SCRIPTSDIR="$(dirname "$(pwd)/$0")"
+. "$SCRIPTSDIR/utils"
+
+# Install pyFormex and its config.
+REP="bumps:/srv/git/pyformex.git"
+TGT="$HOME/Documents/pyformex"
+CFG=".config/pyformex/pyformex.conf"
+install_git_repo "pyFormex" "$REP" "$TGT"
+install_symlink_to "$CFG"
+
+# Install TAVIguide-pp and its config.
+REP="https://net.feops.com/gitlab/feops/TAVIguide-pp.git"
+TGT="$HOME/Documents/feops/taviguide/taviguide-pp"
+CFG=".config/pyformex/taviguide.conf"
+install_git_repo "TAVIguide-pp" "$REP" "$TGT"
+install_symlink_to "$CFG"
+
+# Install MITRALguide-pp.
+REP="https://net.feops.com/gitlab/feops/MITRALguide-pp.git"
+TGT="$HOME/Documents/feops/mitralguide/mitralguide-pp"
+install_git_repo "MITRALguide-pp" "$REP" "$TGT"

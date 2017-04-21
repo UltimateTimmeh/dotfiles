@@ -1,12 +1,12 @@
 .PHONY: clean installgeneral installwork install
 
 clean:
-	./clean
+	scripts/clean
 
 installgeneral:
-	./install_general
+	scripts/install_general
 
 installwork:
-	./install_work
+	scripts/install_work
 
 install: installgeneral installwork clean

@@ -1,0 +1,36 @@
+#!/usr/bin/env bash
+
+# Source utility functions.
+SCRIPTSDIR="$(dirname "$(pwd)/$0")"
+. "$SCRIPTSDIR/utils"
+
+# Install bashrc.
+install_symlink_to ".bashrc"
+install_symlink_to ".bash_aliases"
+install_symlink_to ".bash_prompt"
+
+# Install SSH config.
+install_symlink_to ".ssh/config"
+
+# Install xfce4-terminal config.
+install_symlink_to ".config/xfce4/terminal/terminalrc"
+
+# Install git config.
+install_symlink_to ".gitconfig"
+
+# Install Emacs24 and its config and theme.
+install_apt "emacs24"
+install_symlink_to ".emacs"
+install_symlink_to ".emacs.d/themes/ample-zen-theme.el"
+
+# Install Sublime Text 3 and its config and user commands.
+URL="https://download.sublimetext.com/sublime-text_build-3126_amd64.deb"
+download_and_install_deb "Sublime Text 3" "$URL"
+USERDIR=".config/sublime-text-3/Packages/User"
+install_symlink_to "$USERDIR/Anaconda.sublime-settings"
+install_symlink_to "$USERDIR/Default (Linux).sublime-keymap"
+install_symlink_to "$USERDIR/Preferences.sublime-settings"
+install_symlink_to "$USERDIR/pylintrc"
+install_symlink_to "$USERDIR/Python.sublime-settings"
+install_symlink_to "$USERDIR/SublimeLinter.sublime-settings"
+install_symlink_to "$USERDIR/show_keyboard_shortcuts.py"
