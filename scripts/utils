@@ -41,6 +41,7 @@ download_and_install_deb() {
   if [[ "${REPLY,,}" == y* ]]; then
     wget -P "/tmp" "$2"
     sudo dpkg -i "/tmp/$(basename $2)"
+    sudo apt-get -f install
   fi
 }
 

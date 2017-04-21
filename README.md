@@ -100,3 +100,5 @@ This procedure currently installs the following software (of course always askin
 - Add more automatic software installations:
 
   - pyformex extras
+  - Sublime Text 3 Packages
+
