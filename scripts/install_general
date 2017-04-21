@@ -19,7 +19,7 @@ install_symlink_to ".config/xfce4/terminal/terminalrc"
 install_symlink_to ".gitconfig"
 
 # Install Emacs24 and its config and theme.
-install_apt "emacs24"
+install_apt "Emacs 24" "emacs24"
 install_symlink_to ".emacs"
 install_symlink_to ".emacs.d/themes/ample-zen-theme.el"
 

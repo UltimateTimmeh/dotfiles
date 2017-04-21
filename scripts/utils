@@ -21,14 +21,14 @@ install_symlink_to() {
   ln -sfv "$TARGET" "$LINKNAME"
 }
 
-# Install a package from the distro repositories.
+# Install packages from the distro repositories.
 install_apt() {
   read -rn 1 -p "Install $1? [y/N]: "
   if [ ! -z "$REPLY" ]; then  # No blank line after ENTER.
     echo
   fi
   if [[ "${REPLY,,}" == y* ]]; then
-    sudo apt-get install "$1"
+    sudo apt-get install $2
   fi
 }
 
