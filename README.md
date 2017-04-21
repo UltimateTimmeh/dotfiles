@@ -3,10 +3,10 @@
 This is my personal dotfiles repository. Feel free to use anything you see
 here, but do so at your own risk!
 
-## Fresh install guide.
+## Fresh install quickguide.
 
-Following is a step-by-step guide of what you have to do to install this
-dotfiles repository after a fresh installation of your system. This guide
+Following is a quick step-by-step guide of what you have to do to install this
+dotfiles repository after a fresh installation of your OS. This guide
 was created assuming a fresh installation of Debian Stretch with XFCE4
 desktop environment.
 
@@ -17,7 +17,8 @@ desktop environment.
 1. `adduser <user> sudo`
 1. Log out and back in.
 1. Open a terminal.
-1. `git clone https://www.github.com/UltimateTimmeh/dotfiles.git $HOME/.dotfiles`
+1. `sudo apt-get install make git`
+1. `git clone https://github.com/UltimateTimmeh/dotfiles.git $HOME/.dotfiles`
 1. `cd $HOME/.dotfiles`
 1. `make install`
 1. When prompted, decide if you want to install the specified software.
@@ -93,6 +94,7 @@ This procedure currently installs the following software (of course always askin
 - Make alias pyformex general with $HOME.
 - Automatically edit/replace vtk init file after installing pyFormex
   dependencies.
+- Add instructions for setting the behavior of the 'PgUp' key in the terminal.
 - Add more automatic software installations:
 
   - google-chrome
