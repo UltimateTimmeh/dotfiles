@@ -14,7 +14,6 @@ My personal dotfiles repository.
   - pcmanfm
   - google-chrome
   - git + gitk
-  - pyformex dependencies
   - pyformex extras (paraview, vtk, vmtk, gts, dicom, etc...)
   - pulse audio
   - qalculate

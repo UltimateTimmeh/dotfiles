@@ -4,11 +4,14 @@
 SCRIPTSDIR="$(dirname "$(pwd)/$0")"
 . "$SCRIPTSDIR/utils"
 
-# Install pyFormex and its config.
+# Install pyFormex, its dependencies and its config.
 REP="bumps:/srv/git/pyformex.git"
 TGT="$HOME/Documents/pyformex"
 CFG=".config/pyformex/pyformex.conf"
+DEP="python-numpy python-opengl python-qt4 python-pyside"
+DEP="$DEP python-qt4-gl python-dev libglu1-mesa-dev libfreetype6-dev"
 install_git_repo "pyFormex" "$REP" "$TGT"
+install_apt "pyFormex dependencies" "$DEP"
 install_symlink_to "$CFG"
 
 # Install TAVIguide-pp and its config.

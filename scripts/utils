@@ -23,7 +23,7 @@ install_symlink_to() {
 
 # Install packages from the distro repositories.
 install_apt() {
-  read -rn 1 -p "Install $1? [y/N]: "
+  read -rn 1 -p "Install $1? [y/N] "
   if [ ! -z "$REPLY" ]; then  # No blank line after ENTER.
     echo
   fi
@@ -34,7 +34,7 @@ install_apt() {
 
 # Download and install a .deb file.
 download_and_install_deb() {
-  read -rn 1 -p "Install $1? [y/N]: "
+  read -rn 1 -p "Install $1? [y/N] "
   if [ ! -z "$REPLY" ]; then  # No blank line after ENTER.
     echo
   fi
@@ -47,7 +47,7 @@ download_and_install_deb() {
 # Clone a GIT repository.
 # Repositories are only cloned if the target doesn't exist.
 install_git_repo() {
-  read -rn 1 -p "Install $1? [y/N]: "
+  read -rn 1 -p "Install $1? [y/N] "
   if [ ! -z "$REPLY" ]; then  # No blank line after ENTER.
     echo
   fi
