@@ -1,7 +1,59 @@
-# dotfiles
-My personal dotfiles repository.
+# UltimateTimmeh's .dotfiles repository
 
-# To do
+This is my personal dotfiles repository. Feel free to use anything you see
+here, but do so at your own risk!
+
+## Fresh install guide.
+
+Following is a step-by-step guide of what you have to do to install this
+dotfiles repository after a fresh installation of your system. This guide
+was created assuming a fresh installation of Debian Stretch with XFCE4
+desktop environment.
+
+1. Open a terminal.
+1. `su`
+1. Edit /etc/apt/sources.list to include contrib and non-free.
+1. `apt-get update`, `apt-get install sudo`
+1. `adduser <user> sudo`
+1. Log out and back in.
+1. Open a terminal.
+1. `git clone https://www.github.com/UltimateTimmeh/dotfiles.git $HOME/.dotfiles`
+1. `cd $HOME/.dotfiles`
+1. `make install`
+1. When prompted, decide if you want to install the specified software.
+   For safety, the default is always 'No'.
+
+This procedure currently installs the following software:
+
+**General:**
+
+- Emacs 24: For when a proper terminal text editor is needed. Installed with
+  the package manager (emacs24).
+- Sublime Text 3: For all the main programming and text editing tasks.
+  Installed from the .deb file downloaded from Sublime Text's official website.
+  **Note:** Packages are not yet automatically installed, but the 'User' config
+  directory in the dotfiles repository contains a list.
+
+**Work:**
+
+- pyFormex dependencies: Required to successfully run pyFormex. Installed with
+  the package manager (python-numpy python-opengl python-qt4 python-pyside
+  python-qt4-gl python-dev libglu1-mesa-dev libfreetype6-dev python-
+  pkg-config libgts-dev libglib2.0-dev gcc docutils-common admesh paraview vtk6
+  python-vtk6 vmtk python-vmtk units python-scipy python-dicom).
+- pyFormex: For manipulating geometrical structures and setting up FEA/CFD
+  simulations. Installed from the developer GIT repository (credentials
+  required). **Note:** the GTS extras included in the pyFormex source are not yet
+  automatically installed. Go to pyformex/pyformex/extra/gts and run `sudo
+  make all` to install them.
+- TAVIguide-pp: pyFormex application for pre- and postprocessing of TAVIguide
+  case FEA and CFD simulations. Installed from the developer GIT repository
+  (credentials required).
+- MITRALguide-pp: pyFormex application for pre- and postprocessing of
+  MITRALguide case FEA and CFD simulations. Installed from the developer GIT
+  repository (credentials required).
+
+## To do
 
 - Add cleaner verbosity in installation scripts.
 - Turn "Debian tips and tricks" into markdown instead of plain text.
