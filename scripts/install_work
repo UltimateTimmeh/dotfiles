@@ -10,8 +10,11 @@ TGT="$HOME/Documents/pyformex"
 CFG=".config/pyformex/pyformex.conf"
 DEP="python-numpy python-opengl python-qt4 python-pyside"
 DEP="$DEP python-qt4-gl python-dev libglu1-mesa-dev libfreetype6-dev"
-install_git_repo "pyFormex" "$REP" "$TGT"
+DEP="$DEP python-matplotlib pkg-config libgts-dev libglib2.0-dev gcc"
+DEP="$DEP docutils-common admesh paraview vtk6 python-vtk6 vmtk python-vmtk"
+DEP="$DEP units python-scipy python-dicom"
 install_apt "pyFormex dependencies" "$DEP"
+install_git_repo "pyFormex" "$REP" "$TGT"
 install_symlink_to "$CFG"
 
 # Install TAVIguide-pp and its config.
