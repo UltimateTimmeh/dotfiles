@@ -30,6 +30,7 @@ alias cp="cp -rvi"
 alias ln="ln -i"
 
 # Make common commands shorter
+alias rsync="rsync -avvhP"
 alias calc="libreoffice --calc"
 alias writer="libreoffice --writer"
 alias impress="libreoffice --impress"
