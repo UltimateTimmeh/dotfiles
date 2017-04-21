@@ -65,6 +65,11 @@ commands = [
         "args": {},
     },
     {
+        "text": "Show Markdown Preview - Ctrl+Shift+G",
+        "command": "github_markdown_preview",
+        "args": {},
+    },
+    {
         "text": "----",
         "command": "",
         "args": {}
