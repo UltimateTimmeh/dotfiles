@@ -23,16 +23,44 @@ desktop environment.
 1. When prompted, decide if you want to install the specified software.
    For safety, the default is always 'No'.
 
-This procedure currently installs the following software:
+This procedure currently installs the following software (of course always asking permission first):
 
 **General:**
 
+- sshfs: For mounting remote filesystems. Installed with the package
+  manager (sshfs). **Note:** A few aliases in .bash_aliases require this,
+  but installing this package alone is not enough since the mountpoints don't
+  exist in a fresh install.
+- mlocate: Uses a database of the filesystem to more quickly find files.
+  Installed with the package manager (mlocate).
+- gitk: Graphical visualizer for Git repositories. Installed with the package
+  manager (git gitk). **Note:** Also installs Git, if for some reason this is
+  not yet installed.
+- PCManFM: Better file manager than Thunar. Installed with the package manager
+  (pcmanfm). **Note:** Bind this package to 'Ctrl+Alt+F' for easy access.
 - Emacs 24: For when a proper terminal text editor is needed. Installed with
   the package manager (emacs24).
 - Sublime Text 3: For all the main programming and text editing tasks.
   Installed from the .deb file downloaded from Sublime Text's official website.
   **Note:** Packages are not yet automatically installed, but the 'User' config
-  directory in the dotfiles repository contains a list.
+  directory in the dotfiles repository contains a list. **Note:** Bind this
+  package to 'Ctrl+Alt+S' for easy access.
+- PulseAudio: Better sound input/output/volume control. Installed with the
+  package manager (pulseaudio pavucontrol).
+- Thunderbird: Mail client. Installed with the package manager (thunderbird
+  lightning calendar-google-provider).
+- LibreOffice: The poor man's Office suite. Installed with the package
+  manager (libreoffice).
+- VLC Media Player: The best video player. Installed with the package
+  manager (vlc).
+- scrot: Command line screen capture utility. Installed with the package
+  manager (scrot). **Note:** Bind this package to the 'Print' key for easy
+  access.
+- GIMP: The poor man's Photoshop. Installed with the package manager (gimp).
+- Qalculate!: A powerfull calculator. Installed with the package manager
+  (qalculate). **Note:** Bind this package to the 'Calculator' key for easy
+  access.
+- Deluge: BitTorrent client. Installed with the package manager (deluge).
 
 **Work:**
 
@@ -59,24 +87,13 @@ This procedure currently installs the following software:
 - Turn "Debian tips and tricks" into markdown instead of plain text.
 - Add list of custom system keyboard shortcuts (e.g. Ctrl+Alt+F to open file manager).
 - Add MITRALguide-pp and new TAVIguide-pp config files.
-- Improve backup so files with the same name don't overwrite each other.
+- Improve backup so files with the chance of files with the same name
+  overwriting each other is lower.
 - Decouple installation of software and config/others.
 - Make alias pyformex general with $HOME.
 - Automatically edit/replace vtk init file after installing pyFormex
   dependencies.
 - Add more automatic software installations:
 
-  - pcmanfm
   - google-chrome
-  - git + gitk
   - pyformex extras
-  - pulse audio
-  - qalculate
-  - scrot
-  - gimp
-  - libreoffice
-  - deluge
-  - thunderbird
-  - vlc
-  - sshfs
-  - locate

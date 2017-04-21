@@ -15,10 +15,21 @@ install_symlink_to ".ssh/config"
 # Install xfce4-terminal config.
 install_symlink_to ".config/xfce4/terminal/terminalrc"
 
-# Install git config.
+# Install sshfs.
+install_apt "sshfs" "sshfs"
+
+# Install mlocate.
+install_apt "mlocate" "mlocate"
+
+# Install Git and its config, and gitk.
+install_apt "gitk" "git gitk"
 install_symlink_to ".gitconfig"
 
-# Install Emacs24 and its config and theme.
+# Install PCManFM.
+install_apt "PCManFM" "pcmanfm"
+install_symlink_to ".config/pcmanfm/default/pcmanfm.conf"
+
+# Install Emacs 24 and its config and theme.
 install_apt "Emacs 24" "emacs24"
 install_symlink_to ".emacs"
 install_symlink_to ".emacs.d/themes/ample-zen-theme.el"
@@ -34,3 +45,29 @@ install_symlink_to "$USERDIR/pylintrc"
 install_symlink_to "$USERDIR/Python.sublime-settings"
 install_symlink_to "$USERDIR/SublimeLinter.sublime-settings"
 install_symlink_to "$USERDIR/show_keyboard_shortcuts.py"
+
+# Install PulseAudio.
+install_apt "PulseAudio" "pulseaudio pavucontrol"
+
+# Install Thunderbird.
+install_apt "Thunderbird" "thunderbird lightning calendar-google-provider"
+
+# Install LibreOffice.
+install_apt "LibreOffice" "libreoffice"
+
+# Install VLC Media Player.
+install_apt "VLC Media Player" "vlc"
+
+# Install scrot.
+install_apt "scrot" "scrot"
+
+# Install GIMP.
+install_apt "GIMP" "gimp"
+
+# Install Qalculate!.
+install_apt "Qalculate!" "qalculate"
+
+# Install Deluge.
+install_apt "Deluge" "deluge"
+install_symlink_to ".config/deluge/core.conf"
+install_symlink_to ".config/deluge/gtkui.conf"
