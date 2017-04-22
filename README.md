@@ -1,125 +1,202 @@
 # UltimateTimmeh's .dotfiles repository
 
-This is my personal dotfiles repository. Feel free to use anything you see
-here, but do so at your own risk!
+Welcome to my personal dotfiles repository. Feel free to use anything you see
+here, but do so at your own risk! This dotfiles repository includes a
+procedure for automatically installing a bunch of software items and their
+configuration files. It is intended to be used on Debian Stretch with Xfce4
+desktop environment, so beware!
 
-## Fresh install quickguide.
+## Installation procedure quickguide.
 
-Following is a quick step-by-step guide for installing this dotfiles
-repository after a fresh installation of your OS. The installation scripts and
-this guide were created for a fresh installation of Debian Stretch with Xfce
-desktop environment.
-
-1. Open a terminal.
-1. `su`
-1. Edit /etc/apt/sources.list to include contrib and non-free.
-1. `apt-get update`, `apt-get install sudo`
-1. `adduser <user> sudo`
-1. Log out and back in.
-1. Open a terminal.
-1. `sudo apt-get install make git`
-1. `git clone https://github.com/UltimateTimmeh/dotfiles.git $HOME/.dotfiles`
-1. `cd $HOME/.dotfiles`
+1. `git clone https://github.com/UltimateTimmeh/dotfiles.git ~/.dotfiles`
+1. `cd ~/.dotfiles`
 1. `make install`
-1. When prompted, decide if you want to install the specified software or
-   configuration.
 
-**Installation of the following software is included:**
+## Installation procedure details.
 
-- Deluge: BitTorrent client. Installed with the package manager (deluge).
+### Installation modules.
 
-- Emacs 24: For when a proper terminal text editor is needed. Installed with
-  the package manager (emacs24).
+To make it easier to add or remove software items, the installation procedure
+has been split into several 'modules'. Each module deals with a single
+software item and its configuration files. In essence, each module is a batch
+script named `install_<softwareitem>` with two functions defined inside: (i)
+`software`, for installing the software item itself, its dependencies and
+perhaps extras, and (ii) `config`, for installing the configuration files
+relevant to the software item.
 
-- GIMP: The poor man's Photoshop. Installed with the package manager (gimp).
+If you want to add your own installation modules, you can use the
+`scripts/template` file to get started.
 
-- Git: Version control system. Also installs gitk, a graphical visualizer for
-  Git repositories. Installed with the package manager (git gitk).
+### Running the installation procedure.
 
-- Google Chrome: My preferred web browser. Installed from the official .deb
-  file downloaded from Google's website.
+Running the installation procedure is best done using `make`. There are four
+make targets:
 
-- LibreOffice: The poor man's Office suite. Installed with the package
+- `make software`: Installs all software items by executing the `software`
+  function in all installation modules. All installation modules included in
+  this repository install software in one of three ways: (i) using the package
+  manager, (ii) by downloading and installing a .deb file or (iii) by cloning
+  a Git repository. As expected, the first two typically require root
+  priviliges.
+
+- `make config`: Installs the configuration files of all software items by
+  executing the `config` function in all installation modules. All installation
+  modules included in this repository install configuration files by creating a
+  symlink, pointing to the relevant file in the dotfiles repository, at the
+  location where the software item expects to find it. If a file already exists
+  at that location (e.g. previously existing configuration files), then the
+  existing file is first moved to the configuration file backup directory
+  `~/.dotfilesbak` with a timestamp appended to it.
+
+- `make clean`: Removes the configuration file backup directory
+  `~/.dotfilesbak`.
+
+- `make install`: Executes all three of the above in the given order.
+
+Note that the default installation procedure in this dotfiles repository
+always asks for permission before installing each software item or its
+configuration files. This safeguard is programmed into the installation
+modules themselves, not the outer scope!
+
+### Included software items.
+
+This repository includes installation modules for the following software items:
+
+- **Deluge**: BitTorrent client. Installed with the package manager (deluge).
+  Configuration available.
+
+- **Emacs 24**: My preferred terminal text editor. Installed with the package
+  manager (emacs24). Configuration available.
+
+- **GIMP**: The poor man's Photoshop. Installed with the package manager (gimp).
+
+- **Git**: Version control system. Also installs gitk, a graphical visualizer
+  for Git repositories. Installed with the package manager (git gitk).
+  Configuration available.
+
+- **Google Chrome**: My preferred web browser. Installed from the official .deb
+  file downloaded from Google.
+
+- **LibreOffice**: The poor man's Office suite. Installed with the package
   manager (libreoffice).
 
-- MITRALguide-pp: pyFormex application for pre- and postprocessing of
-  MITRALguide case FEA and CFD simulations. Installed from the developer GIT
+- **MITRALguide-pp**: pyFormex application for pre- and postprocessing of
+  MITRALguide case FEA and CFD simulations. Installed from the developer Git
   repository (credentials required).
 
-- mlocate: Uses a previously-created database of the filesystem to more quickly
-  find files. Installed with the package manager (mlocate).
+- **mlocate**: Uses a routinely-updated database of the filesystem to search for
+  files more quickly than with the `find` command. Installed with the package
+  manager (mlocate).
 
-- PCManFM: Better file manager than Thunar. Installed with the package manager
-  (pcmanfm). **Note:** Bind this package to 'Ctrl+Alt+F' for easy access.
+- **PCManFM**: My preferred file manager. Installed with the package manager
+  (pcmanfm). Configuration available.
 
-- PulseAudio: Better sound input/output/volume control. Installed with the
+- **PulseAudio**: Better sound input/output/volume control. Installed with the
   package manager (pulseaudio pavucontrol).
 
-- pyFormex: For manipulating geometrical structures and setting up FEA/CFD
-  simulations. Installed from the developer GIT repository (credentials
+- **pyFormex**: For manipulating geometrical structures and setting up FEA/CFD
+  simulations. Installed from the developer Git repository (credentials
   required). Also installs a lot of dependencies using the package manager
   (python-numpy python-opengl python-qt4 python-pyside python-qt4-gl python-dev
   libglu1-mesa-dev libfreetype6-dev python-matplotlib pkg-config libgts-dev
   libglib2.0-dev gcc docutils-common admesh paraview vtk6 python-vtk6 vmtk
-  python-vmtk units python-scipy python-dicom). **Note:** the GTS extras
-  included in the pyFormex source are not yet automatically installed. Go to
-  pyformex/pyformex/extra/gts and run `sudo make all` to install them.
-  **Note:** Importing VTK while running pyFormex can cause segmentation faults
+  python-vmtk units python-scipy python-dicom) and some extras included in
+  the source of pyFormex itself. Configuration available.
+
+  *Note:* Importing VTK while running pyFormex can cause segmentation faults
   in pyFormex. This is caused by a conflict between the VTK and pyFormex QT
   bindings. To prevent this from happening, comment out the import of the `dl`
-  module in VTK's `__init__.py` file. To find this file, use
-  `locate vtk/__init__.py`. This is not a proper fix, should be temporary, and
-  will thus not be automated.
+  module in VTK's `__init__.py` file. This is not a proper fix, and because of
+  that it should be temporary and not automated.
 
-- Qalculate!: A powerfull calculator. Installed with the package manager
-  (qalculate). **Note:** Bind this package to the 'Calculator' key for easy
-  access.
+- **Qalculate!**: A powerfull calculator. Installed with the package manager
+  (qalculate).
 
-- scrot: Command line screen capture utility. Installed with the package
-  manager (scrot). **Note:** Bind this package to the 'Print' key for easy
-  access.
+- **scrot**: Simple command line screen capture utility. Installed with the
+  package manager (scrot).
 
-- ssh: Provides secure access to and from remote machines. Also installs sshfs,
-  for mounting remote filesystems. Installed with the package manager (ssh
-  sshfs).
+- **ssh**: Provides secure access to and from remote machines. Also installs
+  sshfs, for mounting remote filesystems. Installed with the package manager
+  (ssh sshfs). Configuration available.
 
-- Sublime Text 3: For all main programming and text editing tasks.
-  Installed from the official .deb file downloaded from Sublime Text's website.
-  **Note:** Bind this package to 'Ctrl+Alt+S' for easy access. **Note:**
-  Installation of the Sublime Text 3 configuration sets up automatic
-  installation of Package Control and a number of Sublime Packages. When
-  starting Sublime Text 3 for the first time, all packages should be installed
-  automatically.
+- **Sublime Text 3**: My preferred text editor. Installed from the official .deb
+  file downloaded from Sublime Text's website. Configuration available.
 
-- TAVIguide-pp: pyFormex application for pre- and postprocessing of TAVIguide
-  case FEA and CFD simulations. Installed from the developer GIT repository
-  (credentials required).
+  *Note:* Installation of the Sublime Text 3 configuration sets up automatic
+  installation of Package Control and a number of Sublime Packages, applied when
+  starting Sublime Text 3 for the first time.
 
-- Thunderbird: Mail client. Also installs Lightning, for calendar support in
+- **TAVIguide-pp**: pyFormex application for pre- and postprocessing of
+  TAVIguide case FEA and CFD simulations. Installed from the developer Git
+  repository (credentials required). Configuration available.
+
+- **Thunderbird**: Mail client. Also installs Lightning, for calendar support in
   Thunderbird, and the Google Calendar provider for Lightning. Installed with
   the package manager (thunderbird lightning calendar-google-provider).
 
-- VLC Media Player: The best all-round media player. Installed with the package
+- **VLC Media Player**: My preferred media player. Installed with the package
   manager (vlc).
 
-**Configuration is included for the following software:**
+- **Xfce4**: My preferred desktop environment. Doesn't install software items
+  (because I'm assuming those are already installed), but includes installation
+  of the following configuration:
+  - .bashrc
+  - xfce4-terminal
+  - xfce4-keyboard-shortcuts
 
-- Deluge
-- Emacs 24
-- Git
-- PCManFM
-- pyFormex
-- ssh
-- Sublime Text 3 and Sublime Packages
-- TAVIguide-pp
-- Xfce Terminal (includes .bashrc)
+### Testing
+
+The installation procedure is frequently tested on a virtual machine with a
+fresh installation of Debian Stretch with Xfce4 desktop environment.
+
+## Keyboard Shortcuts
+
+The Xfce4 installation module includes the installation of a set of keyboard
+shortcuts. When installed, the following keyboard shortcuts become available:
+
+| Combination | Effect                      |
+| ----------- | --------------------------- |
+| Ctrl+Alt+T  | Xfce4 Terminal              |
+| Ctrl+Alt+F  | PCManFM                     |
+| Ctrl+Alt+B  | Google Chrome               |
+| Ctrl+Alt+S  | Sublime Text 3              |
+| Calculator  | Qalculate!                  |
+| Mute        | PulseAudio, toggle mute     |
+| Vol. Down   | PulseAudio, decrease volume |
+| Vol. Up     | PulseAudio, increase volume |
+| PrntScrn    | scrot                       |
+| Ctrl+Alt+V  | NVIDIA Settings             |
+
+## Debian Stretch installation guide.
+
+UNDER CONSTRUCTION.
+
+The first thing you should do once Debian Stretch has been installed, is
+execute the full installation procedure included in this dotfiles repository
+(well, you should *probably* first configure the logical volume groups):
+
+1. Open a terminal.
+1. `su`
+1. `nano /etc/apt/sources.list`
+1. Include contrib and non-free at the end of each line, exit with Ctrl+X,
+   save the file.
+1. `apt-get update`
+1. `apt-get install sudo`
+1. `adduser <user> sudo`
+1. Log out and back in.
+1. Open a terminal.
+1. `sudo apt-get install make git`
+1. `git clone https://github.com/UltimateTimmeh/dotfiles.git ~/.dotfiles`
+1. `cd ~/.dotfiles`
+1. `make install`
 
 ## To do
 
+- Add full Debian Stretch installation procedure. Include setting up the
+  behavior of the PgUp key (or automate).
 - Add "Debian tips and tricks" to this file.
-- Add full Debian Stretch installation procedure.
-- Add list of custom system keyboard shortcuts (e.g. Ctrl+Alt+F to open file
-  manager).
-- Find a way to automatically install system keyboard shortcuts.
-- Add MITRALguide-pp and new TAVIguide-pp config files.
-- Add instructions for setting the behavior of the 'PgUp' key in the terminal.
+- Add TAVIguide-pp 2.0 and MITRALguide-pp config files.
+- Add more software items:
+  - NVIDIA drivers (?)
+  - rsync (if not in base installation)
+  - xfce4-goodies (if not in base installation)
