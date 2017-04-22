@@ -37,10 +37,10 @@ alias impress="libreoffice --impress"
 alias pdf="evince"
 
 # pyFormex aliases
-alias pyformex="/home/tim/Documents/pyformex/pyformex/pyformex --redirect --pyside"
+alias pyformex="$HOME/Documents/pyformex/pyformex/pyformex --redirect --pyside"
 alias pysea="pyformex --search --"
 
-# Mount TAVIguide research case directory with sshfs
+# Aliases for mounting some remote filesystems with sshfs
 alias mount-webdav="sshfs net.feops.com:/mnt/shared/webdav /mnt/webdav -C -o allow_other"
 alias mount-cluster="sshfs net.feops.com:bumper /mnt/cluster -C -o allow_other; sshfs net.feops.com:/mnt/running/tim /mnt/running/tim -C -o allow_other"
 alias mount-tgr="sshfs net.feops.com:/mnt/shared/taviguide/cases /mnt/tgr -C -o allow_other"

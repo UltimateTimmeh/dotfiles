@@ -122,5 +122,4 @@ desktop environment.
   manager).
 - Find a way to automatically install system keyboard shortcuts.
 - Add MITRALguide-pp and new TAVIguide-pp config files.
-- Make alias 'pyformex' general with $HOME.
 - Add instructions for setting the behavior of the 'PgUp' key in the terminal.
