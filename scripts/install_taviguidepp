@@ -1,0 +1,24 @@
+#!/usr/bin/env bash
+# TAVIguide-pp software/config installation module.
+
+# Source utility functions.
+SCRIPTSDIR="$(dirname "$(pwd)/$0")"
+. "$SCRIPTSDIR/utils"
+
+# Software installation.
+software() {
+  Q="Install TAVIguide-pp? [y/n] "
+  if ask "$Q"; then
+    REP="https://net.feops.com/gitlab/feops/TAVIguide-pp.git"
+    TGT="$HOME/Documents/feops/taviguide/taviguide-pp"
+    install_git_repo "$REP" "$TGT"
+  fi
+}
+
+# Config installation.
+config() {
+  Q="Install TAVIguide-pp config? [y/n] "
+  if ask "$Q"; then
+    install_symlink_to ".config/pyformex/taviguide.conf"
+  fi
+}

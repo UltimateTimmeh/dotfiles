@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+# VLC Media Player software/config installation module.
+
+# Source utility functions.
+SCRIPTSDIR="$(dirname "$(pwd)/$0")"
+. "$SCRIPTSDIR/utils"
+
+# Software installation.
+software() {
+  Q="Install VLC Media Player? [y/n] "
+  if ask "$Q"; then
+    PKG="vlc"
+    sudo apt-get install $PKG
+  fi
+}
+
+# Config installation.
+config() {
+  return
+}

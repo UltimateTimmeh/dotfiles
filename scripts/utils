@@ -1,14 +1,30 @@
 #!/usr/bin/env bash
 
-# Get dotfiles config directory.
+# Get '.dotfiles/config' directory.
 SCRIPTSDIR="$(dirname "$(pwd)/$0")"
 CFGDIR="$(realpath "$SCRIPTSDIR/../config")"
+
+# Ask a yes/no question. Returns 0 for yes, 1 for no.
+ask() {
+  while true; do
+    read -rn 1 -p "$1"
+    if [ ! -z "$REPLY" ]; then # No blank line after ENTER.
+      echo
+    fi
+    if [[ "${REPLY,,}" == y* ]]; then
+      return 0
+    fi
+    if [[ "${REPLY,,}" == n* ]]; then
+      return 1
+    fi
+    echo "Please answer [y]es or [n]o."
+  done
+}
 
 # Create a symlink to a config file.
 # If link name exists, it is backed up (with datetime) to ~/.dotfilesbak.
 install_symlink_to() {
   TARGET="$CFGDIR/$1"
-  echo $TARGET
   LINKNAME="$HOME/$1"
   if [ -e "$LINKNAME" ]; then
     BAKDIR="$HOME/.dotfilesbak"
@@ -21,40 +37,23 @@ install_symlink_to() {
   ln -sfv "$TARGET" "$LINKNAME"
 }
 
-# Install packages from the distro repositories.
-install_apt() {
-  read -rn 1 -p "Install $1? [y/N] "
-  if [ ! -z "$REPLY" ]; then  # No blank line after ENTER.
-    echo
-  fi
-  if [[ "${REPLY,,}" == y* ]]; then
-    sudo apt-get install $2
-  fi
-}
-
 # Download and install a .deb file.
+# Also attempts to fix missing dependencies.
+# The .deb file is removed after installation.
 download_and_install_deb() {
-  read -rn 1 -p "Install $1? [y/N] "
-  if [ ! -z "$REPLY" ]; then  # No blank line after ENTER.
-    echo
-  fi
-  if [[ "${REPLY,,}" == y* ]]; then
-    wget -P "/tmp" "$2"
-    sudo dpkg -i "/tmp/$(basename $2)"
-    sudo apt-get -f install
-  fi
+  wget -P "/tmp" "$1"
+  sudo dpkg -i "/tmp/$(basename $1)"
+  sudo apt-get -f install
+  rm -rvf "/tmp/$(basename $1)"
 }
 
 # Clone a GIT repository.
-# Repositories are only cloned if the target doesn't exist.
+# Repositories are only cloned if the target directory doesn't exist.
 install_git_repo() {
-  read -rn 1 -p "Install $1? [y/N] "
-  if [ ! -z "$REPLY" ]; then  # No blank line after ENTER.
-    echo
-  fi
-  if [[ "${REPLY,,}" == y* ]]; then
-    if [ ! -e "$3" ]; then
-      git clone "$2" "$3"
-    fi
+  if [ ! -e "$2" ]; then
+    git clone "$1" "$2"
+  else
+    echo "Did not clone '$1' into '$2'."
+    echo "Directory '$2' already exists."
   fi
 }

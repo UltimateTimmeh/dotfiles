@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+# Install all software in one go.
+
+# Execute the 'software' function from all installation scripts.
+SCRIPTSDIR="$(dirname "$(pwd)/$0")"
+SCRIPTS="$SCRIPTSDIR/install_*"
+for SCRIPT in $SCRIPTS; do
+  . "$SCRIPT"
+  software
+done

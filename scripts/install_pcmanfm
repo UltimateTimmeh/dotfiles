@@ -1,0 +1,23 @@
+#!/usr/bin/env bash
+# PCManFM software/config installation module.
+
+# Source utility functions.
+SCRIPTSDIR="$(dirname "$(pwd)/$0")"
+. "$SCRIPTSDIR/utils"
+
+# Software installation.
+software() {
+  Q="Install PCManFM? [y/n] "
+  if ask "$Q"; then
+    PKG="pcmanfm"
+    sudo apt-get install $PKG
+  fi
+}
+
+# Config installation.
+config() {
+  Q="Install PCManFM config? [y/n] "
+  if ask "$Q"; then
+    install_symlink_to ".config/pcmanfm/default/pcmanfm.conf"
+  fi
+}

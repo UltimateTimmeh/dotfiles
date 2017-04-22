@@ -1,0 +1,31 @@
+#!/usr/bin/env bash
+# Sublime Text 3 software/config installation module.
+
+# Source utility functions.
+SCRIPTSDIR="$(dirname "$(pwd)/$0")"
+. "$SCRIPTSDIR/utils"
+
+# Software installation.
+software() {
+  Q="Install Sublime Text 3? [y/n] "
+  if ask "$Q"; then
+    URL="https://download.sublimetext.com"
+    URL="$URL/sublime-text_build-3126_amd64.deb"
+    download_and_install_deb "$URL"
+  fi
+}
+
+# Config installation.
+config() {
+  Q="Install Sublime Text 3 config? [y/n] "
+  if ask "$Q"; then
+    USERDIR=".config/sublime-text-3/Packages/User"
+    install_symlink_to "$USERDIR/Anaconda.sublime-settings"
+    install_symlink_to "$USERDIR/Default (Linux).sublime-keymap"
+    install_symlink_to "$USERDIR/Preferences.sublime-settings"
+    install_symlink_to "$USERDIR/pylintrc"
+    install_symlink_to "$USERDIR/Python.sublime-settings"
+    install_symlink_to "$USERDIR/SublimeLinter.sublime-settings"
+    install_symlink_to "$USERDIR/show_keyboard_shortcuts.py"
+  fi
+}

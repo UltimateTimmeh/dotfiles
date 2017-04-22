@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+# MITRALguide-pp software/config installation module.
+
+# Source utility functions.
+SCRIPTSDIR="$(dirname "$(pwd)/$0")"
+. "$SCRIPTSDIR/utils"
+
+# Software installation.
+software() {
+  Q="Install MITRALguide-pp? [y/n] "
+  if ask "$Q"; then
+    REP="https://net.feops.com/gitlab/feops/MITRALguide-pp.git"
+    TGT="$HOME/Documents/feops/mitralguide/mitralguide-pp"
+    install_git_repo "$REP" "$TGT"
+  fi
+}
+
+# Config installation.
+config() {
+  return
+}

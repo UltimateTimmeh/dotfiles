@@ -1,0 +1,23 @@
+#!/usr/bin/env bash
+# ssh software/config installation module.
+
+# Source utility functions.
+SCRIPTSDIR="$(dirname "$(pwd)/$0")"
+. "$SCRIPTSDIR/utils"
+
+# Software installation.
+software() {
+  Q="Install ssh and sshfs? [y/n] "
+  if ask "$Q"; then
+    PKG="ssh sshfs"
+    sudo apt-get install $PKG
+  fi
+}
+
+# Config installation.
+config() {
+  Q="Install ssh config? [y/n] "
+  if ask "$Q"; then
+    install_symlink_to ".ssh/config"
+  fi
+}

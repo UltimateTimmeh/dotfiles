@@ -1,0 +1,36 @@
+#!/usr/bin/env bash
+# pyFormex software/config installation module.
+
+# Source utility functions.
+SCRIPTSDIR="$(dirname "$(pwd)/$0")"
+. "$SCRIPTSDIR/utils"
+
+# Software installation.
+software() {
+  Q="Install pyFormex? [y/n] "
+  if ask "$Q"; then
+    # pyFormex dependencies.
+    PKG="python-numpy python-opengl python-qt4 python-pyside"
+    PKG="$PKG python-qt4-gl python-dev libglu1-mesa-dev libfreetype6-dev"
+    PKG="$PKG python-matplotlib pkg-config libgts-dev libglib2.0-dev gcc"
+    PKG="$PKG docutils-common admesh paraview vtk6 python-vtk6 vmtk python-vmtk"
+    PKG="$PKG units python-scipy python-dicom"
+    sudo apt-get install $PKG
+    # pyFormex Git repository.
+    REP="bumps:/srv/git/pyformex.git"
+    TGT="$HOME/Documents/pyformex"
+    install_git_repo "$REP" "$TGT"
+    # pyFormex extra's
+    ### Not yet implemented.
+    # Replace VTK init.
+    ### Not yet implemented.
+  fi
+}
+
+# Config installation.
+config() {
+  Q="Install pyFormex config? [y/n] "
+  if ask "$Q"; then
+    install_symlink_to ".config/pyformex/pyformex.conf"
+  fi
+}

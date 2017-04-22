@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+# GIMP software/config installation module.
+
+# Source utility functions.
+SCRIPTSDIR="$(dirname "$(pwd)/$0")"
+. "$SCRIPTSDIR/utils"
+
+# Software installation.
+software() {
+  Q="Install GIMP? [y/n] "
+  if ask "$Q"; then
+    PKG="gimp"
+    sudo apt-get install $PKG
+  fi
+}
+
+# Config installation.
+config() {
+  return
+}

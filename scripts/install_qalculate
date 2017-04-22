@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+# Qalculate! software/config installation module.
+
+# Source utility functions.
+SCRIPTSDIR="$(dirname "$(pwd)/$0")"
+. "$SCRIPTSDIR/utils"
+
+# Software installation.
+software() {
+  Q="Install Qalculate!? [y/n] "
+  if ask "$Q"; then
+    PKG="qalculate"
+    sudo apt-get install $PKG
+  fi
+}
+
+# Config installation.
+config() {
+  return
+}

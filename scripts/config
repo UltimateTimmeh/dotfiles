@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+# Install all config in one go.
+
+# Execute the 'config' function from all installation scripts.
+SCRIPTSDIR="$(dirname "$(pwd)/$0")"
+SCRIPTS="$SCRIPTSDIR/install_*"
+for SCRIPT in $SCRIPTS; do
+  . "$SCRIPT"
+  config
+done
+exit

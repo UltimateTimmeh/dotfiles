@@ -1,0 +1,25 @@
+#!/usr/bin/env bash
+# Xfce Terminal software/config installation module.
+
+# Source utility functions.
+SCRIPTSDIR="$(dirname "$(pwd)/$0")"
+. "$SCRIPTSDIR/utils"
+
+# Software installation.
+software() {
+  return
+}
+
+# Config installation.
+config() {
+  Q="Install .bashrc? [y/n] "
+  if ask "$Q"; then
+    install_symlink_to ".bashrc"
+    install_symlink_to ".bash_aliases"
+    install_symlink_to ".bash_prompt"
+  fi
+  Q="Install Xfce Terminal config? [y/n] "
+  if ask "$Q"; then
+    install_symlink_to ".config/xfce4/terminal/terminalrc"
+  fi
+}

@@ -1,0 +1,24 @@
+#!/usr/bin/env bash
+# Template for software/config installation module.
+
+# Source utility functions.
+SCRIPTSDIR="$(dirname "$(pwd)/$0")"
+. "$SCRIPTSDIR/utils"
+
+# Software installation.
+software() {
+  # Q="Install ...? [y/n] "
+  # if ask "$Q"; then
+  #   install_software
+  # fi
+  return
+}
+
+# Config installation.
+config() {
+  # Q="Install ... config? [y/n] "
+  # if ask "$Q"; then
+  #   install_config
+  # fi
+  return
+}
