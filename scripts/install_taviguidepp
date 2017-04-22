@@ -9,7 +9,8 @@ SCRIPTSDIR="$(dirname "$(pwd)/$0")"
 software() {
   Q="Install TAVIguide-pp? [y/n] "
   if ask "$Q"; then
-    REP="https://net.feops.com/gitlab/feops/TAVIguide-pp.git"
+    read -rp "Username for 'https://net.feops.com': " USER
+    REP="https://$USER@net.feops.com/gitlab/feops/TAVIguide-pp.git"
     TGT="$HOME/Documents/feops/taviguide/taviguide-pp"
     install_git_repo "$REP" "$TGT"
   fi

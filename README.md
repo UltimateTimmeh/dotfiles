@@ -151,10 +151,6 @@ fresh installation of Debian Stretch with Xfce4 desktop environment.
 
 ### Issues
 
-1. During a full fresh execution of the installation procedure, installing
-   pyFormex fails. This is because, due to the order of installation,
-   the ssh config is not yet installed. Instead of changing the order of the
-   installation, the pyFormex installation should be updated.
 1. Installing the keyboard shortcuts doesn't work. The symlink is created
    correctly, but the keyboard shortcuts are not picked up. Logging out and
    in doesn't fix this. Checking the application shortcuts in the keyboard
