@@ -54,6 +54,6 @@ install_git_repo() {
     git clone "$1" "$2"
   else
     echo "Did not clone '$1' into '$2'."
-    echo "Directory '$2' already exists."
+    echo "Directory or file '$2' already exists."
   fi
 }

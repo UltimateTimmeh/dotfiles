@@ -21,9 +21,13 @@ software() {
     TGT="$HOME/Documents/pyformex"
     install_git_repo "$REP" "$TGT"
     # pyFormex extra's
-    ### Not yet implemented.
-    # Replace VTK init.
-    ### Not yet implemented.
+    EXT="$TGT/pyformex/extra"
+    if [ -d "$EXT" ]; then
+      CWD=$(pwd)
+      cd "$EXT/gts"
+      sudo make all
+      cd "$CWD"
+    fi
   fi
 }
 

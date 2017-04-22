@@ -68,7 +68,8 @@ desktop environment.
   in pyFormex. This is caused by a conflict between the VTK and pyFormex QT
   bindings. To prevent this from happening, comment out the import of the `dl`
   module in VTK's `__init__.py` file. To find this file, use
-  `locate vtk/__init__.py`
+  `locate vtk/__init__.py`. This is not a proper fix, should be temporary, and
+  will thus not be automated.
 
 - Qalculate!: A powerfull calculator. Installed with the package manager
   (qalculate). **Note:** Bind this package to the 'Calculator' key for easy
@@ -109,22 +110,19 @@ desktop environment.
 - ssh
 - Sublime Text 3
 - TAVIguide-pp
-- Xfce Terminal (includes installation of .bashrc)
+- Xfce Terminal (includes .bashrc)
 
 ## To do
 
-- Add cleaner verbosity in installation scripts.
-- Turn "Debian tips and tricks" into markdown instead of plain text.
-- Add list of custom system keyboard shortcuts (e.g. Ctrl+Alt+F to open file manager).
+- Add "Debian tips and tricks" to this file.
+- Add full Debian Stretch installation procedure.
+- Add list of custom system keyboard shortcuts (e.g. Ctrl+Alt+F to open file
+  manager).
+- Find a way to automatically install system keyboard shortcuts.
 - Add MITRALguide-pp and new TAVIguide-pp config files.
-- Improve backup so files with the chance of files with the same name
-  overwriting each other is lower.
 - Make alias 'pyformex' general with $HOME.
-- Automatically edit/replace vtk init file after installing pyFormex
-  dependencies.
 - Add instructions for setting the behavior of the 'PgUp' key in the terminal.
 - Remove downloaded .deb file after installation.
 - Add more automatic software installations:
 
-  - pyformex extras
   - Sublime Text 3 Packages
