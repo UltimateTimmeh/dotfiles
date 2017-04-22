@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Xfce Terminal software/config installation module.
+# Xfce software/config installation module.
 
 # Source utility functions.
 SCRIPTSDIR="$(dirname "$(pwd)/$0")"
@@ -21,5 +21,11 @@ config() {
   Q="Install Xfce Terminal config? [y/n] "
   if ask "$Q"; then
     install_symlink_to ".config/xfce4/terminal/terminalrc"
+  fi
+  Q="Install keyboard shortcuts? [y/n] "
+  if ask "$Q"; then
+    TGT=".config/xfce4/xfconf/xfce-perchannel-xml"
+    TGT="$TGT/xfce4-keyboard-shortcuts.xml"
+    install_symlink_to "$TGT"
   fi
 }
