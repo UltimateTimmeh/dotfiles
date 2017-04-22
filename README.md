@@ -6,15 +6,15 @@ procedure for automatically installing a bunch of software items and their
 configuration files. It is intended to be used on Debian Stretch with Xfce4
 desktop environment, so beware!
 
-## Installation procedure quickguide.
+## Installation procedure quickguide
 
 1. `git clone https://github.com/UltimateTimmeh/dotfiles.git ~/.dotfiles`
 1. `cd ~/.dotfiles`
 1. `make install`
 
-## Installation procedure details.
+## Installation procedure details
 
-### Installation modules.
+### Installation modules
 
 To make it easier to add or remove software items, the installation procedure
 has been split into several 'modules'. Each module deals with a single
@@ -27,7 +27,7 @@ relevant to the software item.
 If you want to add your own installation modules, you can use the
 `scripts/template` file to get started.
 
-### Running the installation procedure.
+### Running the installation procedure
 
 Running the installation procedure is best done using `make`. There are four
 make targets:
@@ -58,7 +58,7 @@ always asks for permission before installing each software item or its
 configuration files. This safeguard is programmed into the installation
 modules themselves, not the outer scope!
 
-### Included software items.
+### Included software items
 
 This repository includes installation modules for the following software items:
 
@@ -175,7 +175,7 @@ shortcuts. When installed, the following keyboard shortcuts become available:
 | PrntScrn    | scrot                       |
 | Ctrl+Alt+V  | NVIDIA Settings             |
 
-## Debian Stretch installation guide.
+## Debian Stretch installation guide
 
 UNDER CONSTRUCTION.
 
