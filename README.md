@@ -149,6 +149,18 @@ This repository includes installation modules for the following software items:
 The installation procedure is frequently tested on a virtual machine with a
 fresh installation of Debian Stretch with Xfce4 desktop environment.
 
+### Issues
+
+1. During a full fresh execution of the installation procedure, installing
+   pyFormex fails. This is because, due to the order of installation,
+   the ssh config is not yet installed. Instead of changing the order of the
+   installation, the pyFormex installation should be updated.
+1. Installing the keyboard shortcuts doesn't work. The symlink is created
+   correctly, but the keyboard shortcuts are not picked up. Logging out and
+   in doesn't fix this. Checking the application shortcuts in the keyboard
+   menu shows that the shortcuts are indeed not there, and when adding one
+   manually the symlink is overwritten.
+
 ## Keyboard Shortcuts
 
 The Xfce4 installation module includes the installation of a set of keyboard
