@@ -1,0 +1,19 @@
+{
+	"bootstrapped": true,
+	"in_process_packages":
+	[
+	],
+	"installed_packages":
+	[
+		"Anaconda",
+		"GitGutter",
+		"GitHub Flavored Markdown Preview",
+		"Package Control",
+		"SideBarEnhancements",
+		"Sublime Tutor",
+		"SublimeLinter",
+		"SublimeLinter-pylint",
+		"Terminal",
+		"Theme - Flatland"
+	]
+}

@@ -42,9 +42,10 @@ install_symlink_to() {
 # The .deb file is removed after installation.
 download_and_install_deb() {
   wget -P "/tmp" "$1"
-  sudo dpkg -i "/tmp/$(basename $1)"
+  DEB="/tmp/$(basename "$1")"
+  sudo dpkg -i "$DEB"
   sudo apt-get -f install
-  rm -rvf "/tmp/$(basename $1)"
+  rm -rvf "$DEB"
 }
 
 # Clone a GIT repository.

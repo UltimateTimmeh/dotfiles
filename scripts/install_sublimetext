@@ -19,7 +19,19 @@ software() {
 config() {
   Q="Install Sublime Text 3 config? [y/n] "
   if ask "$Q"; then
-    USERDIR=".config/sublime-text-3/Packages/User"
+    STDIR=".config/sublime-text-3"
+    # Package Control.
+    IPDIR="$HOME/$STDIR/Installed Packages"
+    PCTRL="$IPDIR/Package Control.sublime-package"
+    if [ ! -e "$PCTRL" ]; then
+      URL="https://packagecontrol.io/Package%20Control.sublime-package"
+      wget -P "$IPDIR" "$URL"
+    else
+      echo "Sublime Text Package Control already installed."
+    fi
+    # Config files.
+    USERDIR="$STDIR/Packages/User"
+    install_symlink_to "$USERDIR/Package Control.sublime-settings"
     install_symlink_to "$USERDIR/Anaconda.sublime-settings"
     install_symlink_to "$USERDIR/Default (Linux).sublime-keymap"
     install_symlink_to "$USERDIR/Preferences.sublime-settings"

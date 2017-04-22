@@ -83,11 +83,13 @@ desktop environment.
   for mounting remote filesystems. Installed with the package manager (ssh
   sshfs).
 
-- Sublime Text 3: For all the main programming and text editing tasks.
+- Sublime Text 3: For all main programming and text editing tasks.
   Installed from the official .deb file downloaded from Sublime Text's website.
-  **Note:** Packages are not yet automatically installed, but the 'User' config
-  directory in the dotfiles repository contains a list. **Note:** Bind this
-  package to 'Ctrl+Alt+S' for easy access.
+  **Note:** Bind this package to 'Ctrl+Alt+S' for easy access. **Note:**
+  Installation of the Sublime Text 3 configuration sets up automatic
+  installation of Package Control and a number of Sublime Packages. When
+  starting Sublime Text 3 for the first time, all packages should be installed
+  automatically.
 
 - TAVIguide-pp: pyFormex application for pre- and postprocessing of TAVIguide
   case FEA and CFD simulations. Installed from the developer GIT repository
@@ -108,7 +110,7 @@ desktop environment.
 - PCManFM
 - pyFormex
 - ssh
-- Sublime Text 3
+- Sublime Text 3 and Sublime Packages
 - TAVIguide-pp
 - Xfce Terminal (includes .bashrc)
 
@@ -122,7 +124,3 @@ desktop environment.
 - Add MITRALguide-pp and new TAVIguide-pp config files.
 - Make alias 'pyformex' general with $HOME.
 - Add instructions for setting the behavior of the 'PgUp' key in the terminal.
-- Remove downloaded .deb file after installation.
-- Add more automatic software installations:
-
-  - Sublime Text 3 Packages
