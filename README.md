@@ -162,18 +162,18 @@ fresh installation of Debian Stretch with Xfce4 desktop environment.
 The Xfce4 installation module includes the installation of a set of keyboard
 shortcuts. When installed, the following keyboard shortcuts become available:
 
-| Combination | Effect                      |
-| ----------- | --------------------------- |
-| Ctrl+Alt+T  | Xfce4 Terminal              |
-| Ctrl+Alt+F  | PCManFM                     |
-| Ctrl+Alt+B  | Google Chrome               |
-| Ctrl+Alt+S  | Sublime Text 3              |
-| Calculator  | Qalculate!                  |
-| Mute        | PulseAudio, toggle mute     |
-| Vol. Down   | PulseAudio, decrease volume |
-| Vol. Up     | PulseAudio, increase volume |
-| PrntScrn    | scrot                       |
-| Ctrl+Alt+V  | NVIDIA Settings             |
+| Key(s)      | Command                      | Effect                     |
+|:----------- |:---------------------------- |:-------------------------- |
+| Ctrl+Alt+T  | xfce4-terminal               | Open a terminal window     |
+| Ctrl+Alt+F  | PCManFM                      | Open a file manager window |
+| Ctrl+Alt+B  | google-chrome                | Launch Google Chrome       |
+| Ctrl+Alt+S  | subl                         | Launch Sublime Text 3      |
+| Calculator  | qalculate                    | Launch Qalculate!          |
+| Mute        | pactl set-sink-mute 0 toggle | Toggle mute                |
+| Vol. Down   | pactl set-sink-volume 0 -2%  | Decrease volume            |
+| Vol. Up     | pactl set-sink-volume 0 +2%  | Increase volume            |
+| PrntScrn    | scrot                        | Take a screenshot          |
+| Ctrl+Alt+V  | nvidia-settings              | Open NVIDIA settings       |
 
 ## Debian Stretch installation guide
 
