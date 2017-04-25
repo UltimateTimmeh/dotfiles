@@ -28,7 +28,7 @@ install_symlink_to() {
   LINKNAME="$HOME/$1"
   if [ -e "$LINKNAME" ]; then
     BAKDIR="$HOME/.dotfilesbak"
-    BASENAME="$(basename $LINKNAME)"
+    BASENAME="$(basename "$LINKNAME")"
     DATETIME="$(date +%Y%m%d%H%M%S)"
     mkdir -pv "$BAKDIR"
     mv -v "$LINKNAME" "$BAKDIR/$BASENAME-$DATETIME"
