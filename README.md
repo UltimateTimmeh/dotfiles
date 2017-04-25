@@ -205,6 +205,4 @@ execute the full installation procedure included in this dotfiles repository
 - Add "Debian tips and tricks" to this file.
 - Add TAVIguide-pp 2.0 and MITRALguide-pp config files.
 - Add more software items:
-  - NVIDIA drivers (?)
-  - rsync (if not in base installation)
-  - xfce4-goodies (if not in base installation)
+  - nvidia-driver nvidia-settings (?)

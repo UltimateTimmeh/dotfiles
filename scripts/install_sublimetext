@@ -34,6 +34,7 @@ config() {
     install_symlink_to "$USERDIR/Package Control.sublime-settings"
     install_symlink_to "$USERDIR/Anaconda.sublime-settings"
     install_symlink_to "$USERDIR/Default (Linux).sublime-keymap"
+    install_symlink_to "$USERDIR/Plain text.sublime-settings"
     install_symlink_to "$USERDIR/Preferences.sublime-settings"
     install_symlink_to "$USERDIR/pylintrc"
     install_symlink_to "$USERDIR/Python.sublime-settings"
