@@ -165,7 +165,7 @@ shortcuts. When installed, the following keyboard shortcuts become available:
 | Key(s)      | Command                      | Effect                     |
 |:----------- |:---------------------------- |:-------------------------- |
 | Ctrl+Alt+T  | xfce4-terminal               | Open a terminal window     |
-| Ctrl+Alt+F  | PCManFM                      | Open a file manager window |
+| Ctrl+Alt+F  | pcmanfm                      | Open a file manager window |
 | Ctrl+Alt+B  | google-chrome                | Launch Google Chrome       |
 | Ctrl+Alt+S  | subl                         | Launch Sublime Text 3      |
 | Calculator  | qalculate                    | Launch Qalculate!          |
