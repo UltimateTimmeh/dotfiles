@@ -203,6 +203,5 @@ execute the full installation procedure included in this dotfiles repository
 - Add full Debian Stretch installation procedure. Include setting up the
   behavior of the PgUp key (or automate).
 - Add "Debian tips and tricks" to this file.
-- Add TAVIguide-pp 2.0 and MITRALguide-pp config files.
 - Add more software items:
   - nvidia-driver nvidia-settings (?)
