@@ -21,5 +21,6 @@ config() {
   Q="Install TAVIguide-pp config? [y/n] "
   if ask "$Q"; then
     install_symlink_to ".config/pyformex/taviguide.conf"
+    install_symlink_to ".config/pyformex/taviguidepp.conf"
   fi
 }

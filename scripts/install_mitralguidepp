@@ -18,5 +18,8 @@ software() {
 
 # Config installation.
 config() {
-  return
+  Q="Install MITRALguide-pp config? [y/n] "
+  if ask "$Q"; then
+    install_symlink_to ".config/pyformex/mitralguidepp.conf"
+  fi
 }
