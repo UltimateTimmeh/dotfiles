@@ -203,5 +203,6 @@ execute the full installation procedure included in this dotfiles repository
 - Add full Debian Stretch installation procedure. Include setting up the
   behavior of the PgUp key (or automate).
 - Add "Debian tips and tricks" to this file.
+- Add installation of templates.
 - Add more software items:
   - nvidia-driver nvidia-settings (?)
