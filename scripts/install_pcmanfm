@@ -19,5 +19,7 @@ config() {
   Q="Install PCManFM config? [y/n] "
   if ask "$Q"; then
     install_symlink_to ".config/pcmanfm/default/pcmanfm.conf"
+    install_symlink_to ".local/share/file-manager/actions/backup.desktop"
+    install_symlink_to ".local/share/file-manager/actions/restore.desktop"
   fi
 }

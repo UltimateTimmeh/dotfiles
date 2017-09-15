@@ -1,0 +1,9 @@
+[Desktop Entry]
+Type=Action
+Name=Back up
+Icon=document-save-as
+Profiles=profile-zero;
+
+[X-Action-Profile profile-zero]
+Exec=cp %f %f.bak
+Name=Default profile

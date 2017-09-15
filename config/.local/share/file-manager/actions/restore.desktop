@@ -1,0 +1,9 @@
+[Desktop Entry]
+Type=Action
+Name=Restore
+Icon=edit-redo
+Profiles=profile-zero;
+
+[X-Action-Profile profile-zero]
+Exec=rename "s/.bak//" %f
+Name=Default profile
