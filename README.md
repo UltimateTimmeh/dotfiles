@@ -169,10 +169,11 @@ shortcuts. When installed, the following keyboard shortcuts become available:
 | Ctrl+Alt+B  | google-chrome                | Launch Google Chrome       |
 | Ctrl+Alt+S  | subl                         | Launch Sublime Text 3      |
 | Calculator  | qalculate                    | Launch Qalculate!          |
+| PrntScrn    | scrot                        | Take a screenshot          |
 | Mute        | pactl set-sink-mute 0 toggle | Toggle mute                |
 | Vol. Down   | pactl set-sink-volume 0 -2%  | Decrease volume            |
 | Vol. Up     | pactl set-sink-volume 0 +2%  | Increase volume            |
-| PrntScrn    | scrot                        | Take a screenshot          |
+| Ctrl+Alt+A  | pavucontrol                  | Open volume controls       |
 | Ctrl+Alt+V  | nvidia-settings              | Open NVIDIA settings       |
 
 ## Debian Stretch installation guide
