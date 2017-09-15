@@ -194,7 +194,7 @@ execute the full installation procedure included in this dotfiles repository
 1. `adduser <user> sudo`
 1. Log out and back in.
 1. Open a terminal.
-1. `sudo apt-get install make git`
+1. `sudo apt-get install apt-transport-https make git`
 1. `git clone https://github.com/UltimateTimmeh/dotfiles.git ~/.dotfiles`
 1. `cd ~/.dotfiles`
 1. `make install`
