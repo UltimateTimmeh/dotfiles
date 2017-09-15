@@ -119,8 +119,8 @@ This repository includes installation modules for the following software items:
   sshfs, for mounting remote filesystems. Installed with the package manager
   (ssh sshfs). Configuration available.
 
-- **Sublime Text 3**: My preferred text editor. Installed from the official .deb
-  file downloaded from Sublime Text's website. Configuration available.
+- **Sublime Text 3**: My preferred text editor. Installed from the Sublime Text
+  package repositories (sublime-text). Configuration available.
 
   *Note:* Installation of the Sublime Text 3 configuration sets up automatic
   installation of Package Control and a number of Sublime Packages, applied when
