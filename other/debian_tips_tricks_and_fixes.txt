@@ -1,6 +1,8 @@
 This file contains tips, tricks and fixes for all sorts of problems that were encountered during
 configuration of my new laptop, running Debian Jessie 8.2.
 
+Note: In or around May 2017, my system was upgraded to Debian Stretch 9.1. Some tricks may be outdated.
+
 ==============
 VOLUME CONTROL
 ==============
@@ -196,3 +198,14 @@ on the secondary screen. Give it the following settings:
     Notification Area ; don't show frame (only possible in one panel)
     Battery Monitor ; Display icon, bar, percentage in tooltop, time remaining in tooltop
     DateTime ; Date, then time ; Sans Italic 9 1999-12-31 ; Sans 11 23:59:59
+
+=====================
+INDIRECT GLX CONTEXTS
+=====================
+
+To enable the indirect GLX contexts, which are necessary for running OpenGL applications
+(e.g. pyFormex) remotely over SSH with X11 forwarding, do the following:
+
+    # nano /usr/share/lightdm/lightdm.conf.d/01_debian.conf
+
+    Add the line 'xserver-command=X -core +iglx' to the bottom of the file, save and restart.
