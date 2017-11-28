@@ -26,7 +26,6 @@
 	"highlight_modified_tabs": true,
 	"ignored_packages":
 	[
-		"Package Control",
 		"Vintage"
 	],
 	"indent_to_bracket": true,
