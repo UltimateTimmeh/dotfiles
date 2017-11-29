@@ -44,7 +44,10 @@ alias pysea="pyformex --search --"
 alias vpn-on="sudo vpnc.sh"
 alias vpn-off="sudo vpnc.sh -d"
 
+# Alias for activating a work break countdown timer
+alias pause="sleep 420 && google-chrome https://www.youtube.com/watch?v=WYs6Tud55Sc"
+
 # Aliases for mounting some remote filesystems with sshfs
 alias mount-webdav="sshfs kong:/mnt/shared/webdav /mnt/webdav -C -o allow_other"
-alias mount-cluster="sshfs kong:bumper /mnt/cluster -C -o allow_other; sshfs kong:/mnt/running/tim /mnt/running/tim -C -o allow_other"
+alias mount-cluster="sshfs feops1:bumper /mnt/cluster -C -o allow_other; sshfs feops1:/mnt/running/tim /mnt/running/tim -C -o allow_other"
 alias mount-tgr="sshfs kong:/mnt/shared/taviguide/cases /mnt/tgr -C -o allow_other"
