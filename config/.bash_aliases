@@ -37,7 +37,7 @@ alias impress="libreoffice --impress"
 alias pdf="evince"
 
 # pyFormex aliases
-alias pyformex="$HOME/Documents/pyformex/pyformex/pyformex --redirect --pyside"
+alias pyformex="$PYFORMEX_ROOT/pyformex/pyformex --redirect --pyside"
 alias pysea="pyformex --search --"
 
 # Alias for activating and deactivating VPN
@@ -49,5 +49,5 @@ alias pause="sleep 420 && google-chrome https://www.youtube.com/watch?v=WYs6Tud5
 
 # Aliases for mounting some remote filesystems with sshfs
 alias mount-webdav="sshfs kong:/mnt/shared/webdav /mnt/webdav -C -o allow_other"
-alias mount-cluster="sshfs feops1:bumper /mnt/cluster -C -o allow_other; sshfs feops1:/mnt/running/tim /mnt/running/tim -C -o allow_other"
+alias mount-cluster="sshfs feops1:bumper /mnt/cluster -C -o allow_other; sshfs feops1:/mnt/running/$USER /mnt/running/$USER -C -o allow_other"
 alias mount-tgr="sshfs kong:/mnt/shared/taviguide/cases /mnt/tgr -C -o allow_other"

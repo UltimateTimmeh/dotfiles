@@ -6,6 +6,9 @@
 [ -f "/etc/bashrc" ] && . "/etc/bashrc"
 [ -f "/etc/bash.bashrc" ] && . "/etc/bash.bashrc"
 
+# Source custom environment variables.
+[ -f "$HOME/.bash_env" ] && . "$HOME/.bash_env"
+
 # Source aliases.
 [ -f "$HOME/.bash_aliases" ] && . "$HOME/.bash_aliases"
 
