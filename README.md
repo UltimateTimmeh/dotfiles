@@ -189,12 +189,12 @@ execute the full installation procedure included in this dotfiles repository
 1. `nano /etc/apt/sources.list`
 1. Include contrib and non-free at the end of each line, exit with Ctrl+X,
    save the file.
-1. `apt-get update`
-1. `apt-get install sudo`
+1. `apt update`
+1. `apt install sudo`
 1. `adduser <user> sudo`
 1. Log out and back in.
 1. Open a terminal.
-1. `sudo apt-get install apt-transport-https make git`
+1. `sudo apt install apt-transport-https make git`
 1. `git clone https://github.com/UltimateTimmeh/dotfiles.git ~/.dotfiles`
 1. `cd ~/.dotfiles`
 1. `make install`
@@ -206,4 +206,5 @@ execute the full installation procedure included in this dotfiles repository
 - Add "Debian tips and tricks" to this file.
 - Add installation of templates.
 - Add more software items:
+  - LAAOguide-pp
   - nvidia-driver nvidia-settings (?)
