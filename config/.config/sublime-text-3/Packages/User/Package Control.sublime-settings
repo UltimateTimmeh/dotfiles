@@ -6,6 +6,7 @@
 	"installed_packages":
 	[
 		"Anaconda",
+		"BracketHighlighter",
 		"GitGutter",
 		"GitHub Flavored Markdown Preview",
 		"Package Control",
