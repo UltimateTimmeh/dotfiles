@@ -46,6 +46,5 @@ config() {
     install_symlink_to "$USERDIR/Python.sublime-settings"
     install_symlink_to "$USERDIR/SublimeLinter.sublime-settings"
     install_symlink_to "$USERDIR/show_keyboard_shortcuts.py"
-    install_symlink_to "$USERDIR/SublimeLinter/Flatland Dark (SL).tmTheme"
   fi
 }
