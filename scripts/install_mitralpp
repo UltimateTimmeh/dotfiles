@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# MITRALguide-pp software/config installation module.
+# MITRAL-pp software/config installation module.
 
 # Source utility functions.
 SCRIPTSDIR="$(dirname "$(pwd)/$0")"
@@ -7,19 +7,19 @@ SCRIPTSDIR="$(dirname "$(pwd)/$0")"
 
 # Software installation.
 software() {
-  Q="Install MITRALguide-pp? [y/n] "
+  Q="Install MITRAL-pp? [y/n] "
   if ask "$Q"; then
     read -rp "Username for 'https://net.feops.com': " USER
-    REP="https://$USER@net.feops.com/gitlab/feops/MITRALguide-pp.git"
-    TGT="$HOME/Documents/feops/mitralguide/mitralguide-pp"
+    REP="https://$USER@net.feops.com/gitlab/feops/MITRAL-pp.git"
+    TGT="$HOME/Documents/feops/mitral/mitral-pp"
     install_git_repo "$REP" "$TGT"
   fi
 }
 
 # Config installation.
 config() {
-  Q="Install MITRALguide-pp config? [y/n] "
+  Q="Install MITRAL-pp config? [y/n] "
   if ask "$Q"; then
-    install_symlink_to ".config/pyformex/mitralguidepp.conf"
+    install_symlink_to ".config/pyformex/mitralpp.conf"
   fi
 }

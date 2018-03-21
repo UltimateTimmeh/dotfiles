@@ -80,9 +80,9 @@ This repository includes installation modules for the following software items:
 - **LibreOffice**: The poor man's Office suite. Installed with the package
   manager (libreoffice).
 
-- **MITRALguide-pp**: pyFormex application for pre- and postprocessing of
-  MITRALguide case FEA and CFD simulations. Installed from the developer Git
-  repository (credentials required).
+- **MITRAL-pp**: pyFormex application for pre- and postprocessing of
+  MITRAL case FEA and CFD simulations. Installed from the developer Git
+  repository (credentials required). Configuration available.
 
 - **mlocate**: Uses a routinely-updated database of the filesystem to search for
   files more quickly than with the `find` command. Installed with the package
