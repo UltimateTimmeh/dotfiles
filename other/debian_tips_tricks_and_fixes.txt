@@ -1,7 +1,8 @@
 This file contains tips, tricks and fixes for all sorts of problems that were encountered during
 configuration of my new laptop, running Debian Jessie 8.2.
 
-Note: In or around May 2017, my system was upgraded to Debian Stretch 9.1. Some tricks may be outdated.
+Note: In or around May 2017, my system was upgraded to Debian Stretch 9.1. Some tricks have been
+      updated, others may be outdated.
 
 ==============
 VOLUME CONTROL
@@ -189,15 +190,17 @@ on the secondary screen. Give it the following settings:
     Launcher ; Xfce Terminal ; Terminal Emulator ; xfce4-terminal
     Launcher ; File Manager PCManFM ; Browse the file system and manage the files ; pcmanfm
     Launcher ; Google Chrome ; Access the Internet ; google-chrome %U
-    Launcher ; Icedove ; Read/Write Mail/News with Icedove ; icedove %U
+    Launcher ; Thunderbird ; Read/Write Mail/News with Thunderbird ; /usr/bin/thunderbird %u
+    Launcher ; Steam ; Application for managing and playing games on Steam ; /usr/games/steam %U
     Launcher ; pyFormex DEV ; Launch the developer version of pyFormex ; /path/to/pyformex --redirect --pyside
+    Launcher ; TAVIguide-pp ; Launch TAVIguide-pp ; /home/<user>/Documents/pyformex/pyformex/pyformex --gui --redirect --pyside /home/tim/Documents/feops/taviguide/taviguide-pp/taviguide/TAVIguide-pp.py ; TAVIguide-pp icon + TAVIguide-pp legacy ; Launch TAVIguide-pp legacy ; /home/tim/Documents/pyformex/pyformex/pyformex --gui --redirect --pyside /home/tim/Documents/feops/taviguide/taviguide-pp/taviguide/TAVIguide.py ; TAVIguide-pp icon
     Window Buttons
     Separator ; Transparent ; expand
     Workspace Switcher
     Launcher ; PulseAudio Volume Control ; Adjust the volume level ; pavucontrol
     Notification Area ; don't show frame (only possible in one panel)
-    Battery Monitor ; Display icon, bar, percentage in tooltop, time remaining in tooltop
-    DateTime ; Date, then time ; Sans Italic 9 1999-12-31 ; Sans 11 23:59:59
+    Power Manager Plugin
+    Clock ; Layout: Digital, Tooltip format: Custom Format (empty field), Format: Custom Format (%T%n%Y-%m-%d)
 
 =====================
 INDIRECT GLX CONTEXTS
