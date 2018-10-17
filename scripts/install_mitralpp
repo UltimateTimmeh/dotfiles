@@ -11,7 +11,7 @@ software() {
   if ask "$Q"; then
     read -rp "Username for 'https://net.feops.com': " USER
     REP="https://$USER@net.feops.com/gitlab/feops/MITRAL-pp.git"
-    TGT="$HOME/Documents/feops/mitral/mitral-pp"
+    TGT="$HOME/Documents/mitral/mitral-pp"
     install_git_repo "$REP" "$TGT"
   fi
 }

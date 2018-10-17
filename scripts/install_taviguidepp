@@ -11,7 +11,7 @@ software() {
   if ask "$Q"; then
     read -rp "Username for 'https://net.feops.com': " USER
     REP="https://$USER@net.feops.com/gitlab/feops/TAVIguide-pp.git"
-    TGT="$HOME/Documents/feops/taviguide/taviguide-pp"
+    TGT="$HOME/Documents/taviguide/taviguide-pp"
     install_git_repo "$REP" "$TGT"
   fi
 }

@@ -193,7 +193,7 @@ on the secondary screen. Give it the following settings:
     Launcher ; Thunderbird ; Read/Write Mail/News with Thunderbird ; /usr/bin/thunderbird %u
     Launcher ; Steam ; Application for managing and playing games on Steam ; /usr/games/steam %U
     Launcher ; pyFormex DEV ; Launch the developer version of pyFormex ; /path/to/pyformex --redirect --pyside
-    Launcher ; TAVIguide-pp ; Launch TAVIguide-pp ; /home/<user>/Documents/pyformex/pyformex/pyformex --gui --redirect --pyside /home/tim/Documents/feops/taviguide/taviguide-pp/taviguide/TAVIguide-pp.py ; TAVIguide-pp icon + TAVIguide-pp legacy ; Launch TAVIguide-pp legacy ; /home/tim/Documents/pyformex/pyformex/pyformex --gui --redirect --pyside /home/tim/Documents/feops/taviguide/taviguide-pp/taviguide/TAVIguide.py ; TAVIguide-pp icon
+    Launcher ; TAVIguide-pp ; Launch TAVIguide-pp ; /home/<user>/Documents/pyformex/pyformex/pyformex --gui --redirect --pyside /home/tim/Documents/taviguide/taviguide-pp/taviguide/TAVIguide-pp.py ; TAVIguide-pp icon + TAVIguide-pp legacy ; Launch TAVIguide-pp legacy ; /home/tim/Documents/pyformex/pyformex/pyformex --gui --redirect --pyside /home/tim/Documents/taviguide/taviguide-pp/taviguide/TAVIguide.py ; TAVIguide-pp icon
     Window Buttons
     Separator ; Transparent ; expand
     Workspace Switcher
