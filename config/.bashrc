@@ -15,6 +15,9 @@
 # Source fancy prompt.
 [ -f "$HOME/.bash_prompt" ] && . "$HOME/.bash_prompt"
 
+# Add $HOME/bin to PATH
+export PATH=$PATH:$HOME/bin
+
 # Add $HOME/.gitscripts/bin to PATH
 export PATH=$PATH:$HOME/.gitscripts/bin
 
