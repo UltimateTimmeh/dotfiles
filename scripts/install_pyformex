@@ -17,8 +17,8 @@ software() {
     PKG="$PKG units python-scipy python-dicom"
     sudo apt-get install $PKG
     # pyFormex Git repository.
-    read -rp "Username for 'ssh://net.feops.com': " USER
-    REP="ssh://$USER@net.feops.com:1222/srv/git/pyformex.git"
+    read -rp "Username for 'ssh://git.feops.com': " USER
+    REP="ssh://$USER@git.feops.com:1222/srv/git/pyformex.git"
     TGT="$HOME/Documents/pyformex"
     install_git_repo "$REP" "$TGT"
     # pyFormex extra's
