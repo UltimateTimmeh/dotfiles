@@ -37,7 +37,7 @@ alias impress="libreoffice --impress"
 alias pdf="evince"
 
 # pyFormex aliases
-alias pyformex="$PYFORMEX_ROOT/pyformex/pyformex --redirect --pyside"
+alias pyformex="$PYFORMEX_ROOT/pyformex/pyformex --redirect --bindings pyside"
 alias pysea="pyformex --search --"
 
 # Alias for activating and deactivating VPN
