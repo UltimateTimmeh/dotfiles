@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# TAVIguide-pp legacy software/config installation module.
+# TAVI-pp software/config installation module.
 
 # Source utility functions.
 SCRIPTSDIR="$(dirname "$(pwd)/$0")"
@@ -7,25 +7,19 @@ SCRIPTSDIR="$(dirname "$(pwd)/$0")"
 
 # Software installation.
 software() {
-  Q="Install TAVIguide-pp legacy? [y/n] "
+  Q="Install TAVI-pp? [y/n] "
   if ask "$Q"; then
-    # Install TAVI-pp repository.
     read -rp "Username for 'https://net.feops.com': " USER
     REP="https://$USER@net.feops.com/gitlab/feops/TAVI-pp.git"
-    TGT="$HOME/Documents/taviguide/taviguide-pp"
+    TGT="$HOME/Documents/heartguide/tavi-pp"
     install_git_repo "$REP" "$TGT"
-    # Check out legacy version.
-    CWD=$(pwd)
-    cd "$TGT"
-    git checkout legacy
-    cd "$CWD"
   fi
 }
 
 # Config installation.
 config() {
-  Q="Install TAVIguide-pp legacy config? [y/n] "
+  Q="Install TAVI-pp config? [y/n] "
   if ask "$Q"; then
-    install_symlink_to ".config/pyformex/taviguide.conf"
+    install_symlink_to ".config/pyformex/tavipp.conf"
   fi
 }
