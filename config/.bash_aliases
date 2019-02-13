@@ -41,13 +41,13 @@ alias pyformex="$PYFORMEX_ROOT/pyformex/pyformex --redirect --bindings pyside"
 alias pysea="pyformex --search --"
 
 # Alias for activating and deactivating VPN
-alias vpn-on="sudo vpnc.sh"
-alias vpn-off="sudo vpnc.sh -d"
+alias vpnc="sudo feops_vpn_connect"
+alias vpnd="sudo feops_vpn_disconnect"
 
 # Alias for activating a work break countdown timer
 alias pause="sleep 420 && google-chrome https://www.youtube.com/watch?v=WYs6Tud55Sc"
 
 # Aliases for mounting some remote filesystems with sshfs
 alias mount-webdav="sshfs bitsac:/mnt/shared/webdav /mnt/shared/webdav -C -o allow_other"
-alias mount-cluster="sshfs feops1:bumper /mnt/cluster -C -o allow_other; sshfs feops1:/mnt/running/$USER /mnt/running/$USER -C -o allow_other"
+alias mount-cluster="sshfs bitsac:bumper /mnt/cluster -C -o allow_other; sshfs bitsac:/mnt/running/$USER /mnt/running/$USER -C -o allow_other"
 alias mount-tgr="sshfs bitsac:/mnt/shared/taviguide/cases /mnt/tgr -C -o allow_other"
