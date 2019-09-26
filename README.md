@@ -330,6 +330,5 @@ following:
 
 - Include setting up the behavior of the PgUp key (or automate).
   This is found in the file `/etc/inputrc`.
-- Add "Debian tips and tricks" to this file.
 - Installation of templates (python script, pyformex script, libreoffice docs, etc...).
 - Installation of nvidia-driver nvidia-settings (?)
