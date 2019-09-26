@@ -3,14 +3,29 @@
 Welcome to my personal dotfiles repository. Feel free to use anything you see
 here, but do so at your own risk! This dotfiles repository includes a
 procedure for automatically installing a bunch of software items and their
-configuration files. It is intended to be used on Debian Stretch with Xfce4
+configuration files. It is intended to be used on Debian Buster with Xfce4
 desktop environment, so beware!
 
 ## Installation procedure quickguide
 
+Assuming a fresh installation of Debian Buster with Xfce4 desktop environment,
+do the following:
+
+1. Open a terminal.
+1. `su -`
+1. `nano /etc/apt/sources.list`
+1. Include contrib and non-free at the end of each line, exit with Ctrl+X,
+   save the file.
+1. `apt update`
+1. `apt install sudo`
+1. `adduser <user> sudo`
+1. Log out and back in.
+1. Open a terminal.
+1. `sudo apt install apt-transport-https make git`
 1. `git clone https://github.com/UltimateTimmeh/dotfiles.git ~/.dotfiles`
 1. `cd ~/.dotfiles`
 1. `make install`
+1. Follow instructions to install desired software and configuration items.
 
 ## Installation procedure details
 
@@ -65,9 +80,6 @@ This repository includes installation modules for the following software items:
 - **Deluge**: BitTorrent client. Installed with the package manager (deluge).
   Configuration available.
 
-- **Emacs 24**: My preferred terminal text editor. Installed with the package
-  manager (emacs24). Configuration available.
-
 - **GIMP**: The poor man's Photoshop. Installed with the package manager (gimp).
 
 - **Git**: Version control system. Also installs gitk, a graphical visualizer
@@ -79,10 +91,6 @@ This repository includes installation modules for the following software items:
 
 - **LibreOffice**: The poor man's Office suite. Installed with the package
   manager (libreoffice).
-
-- **MITRAL-pp**: pyFormex application for pre- and postprocessing of
-  MITRAL case FEA and CFD simulations. Installed from the developer Git
-  repository (credentials required). Configuration available.
 
 - **mlocate**: Uses a routinely-updated database of the filesystem to search for
   files more quickly than with the `find` command. Installed with the package
@@ -126,10 +134,6 @@ This repository includes installation modules for the following software items:
   installation of Package Control and a number of Sublime Packages, applied when
   starting Sublime Text 3 for the first time.
 
-- **TAVIguide-pp**: pyFormex application for pre- and postprocessing of
-  TAVIguide case FEA and CFD simulations. Installed from the developer Git
-  repository (credentials required). Configuration available.
-
 - **Thunderbird**: Mail client. Also installs Lightning, for calendar support in
   Thunderbird, and the Google Calendar provider for Lightning. Installed with
   the package manager (thunderbird lightning calendar-google-provider).
@@ -142,25 +146,18 @@ This repository includes installation modules for the following software items:
   of the following configuration:
   - .bashrc
   - xfce4-terminal
-  - xfce4-keyboard-shortcuts
 
 ### Testing
 
-The installation procedure is frequently tested on a virtual machine with a
-fresh installation of Debian Stretch with Xfce4 desktop environment.
+The installation procedure is periodically tested on a virtual machine with a
+fresh installation of Debian Buster with Xfce4 desktop environment.
 
-### Issues
+## Extras
 
-1. Installing the keyboard shortcuts doesn't work. The symlink is created
-   correctly, but the keyboard shortcuts are not picked up. Logging out and
-   in doesn't fix this. Checking the application shortcuts in the keyboard
-   menu shows that the shortcuts are indeed not there, and when adding one
-   manually the symlink is overwritten.
+### Keyboard Shortcuts
 
-## Keyboard Shortcuts
-
-The Xfce4 installation module includes the installation of a set of keyboard
-shortcuts. When installed, the following keyboard shortcuts become available:
+I find the following keyboard shortcuts useful. They can be configured in
+Application menu > Settings > Keyboard > Application Shortcuts:
 
 | Key(s)      | Command                      | Effect                     |
 |:----------- |:---------------------------- |:-------------------------- |
@@ -176,35 +173,10 @@ shortcuts. When installed, the following keyboard shortcuts become available:
 | Ctrl+Alt+A  | pavucontrol                  | Open volume controls       |
 | Ctrl+Alt+V  | nvidia-settings              | Open NVIDIA settings       |
 
-## Debian Stretch installation guide
-
-UNDER CONSTRUCTION.
-
-The first thing you should do once Debian Stretch has been installed, is
-execute the full installation procedure included in this dotfiles repository
-(well, you should *probably* first configure the logical volume groups):
-
-1. Open a terminal.
-1. `su`
-1. `nano /etc/apt/sources.list`
-1. Include contrib and non-free at the end of each line, exit with Ctrl+X,
-   save the file.
-1. `apt update`
-1. `apt install sudo`
-1. `adduser <user> sudo`
-1. Log out and back in.
-1. Open a terminal.
-1. `sudo apt install apt-transport-https make git`
-1. `git clone https://github.com/UltimateTimmeh/dotfiles.git ~/.dotfiles`
-1. `cd ~/.dotfiles`
-1. `make install`
-
 ## To do
 
-- Add full Debian Stretch installation procedure. Include setting up the
-  behavior of the PgUp key (or automate).
+- Include setting up the behavior of the PgUp key (or automate).
+  This is found in the file `/etc/inputrc`.
 - Add "Debian tips and tricks" to this file.
-- Add installation of templates.
-- Add more software items:
-  - LAAOguide-pp
-  - nvidia-driver nvidia-settings (?)
+- Installation of templates (python script, pyformex script, libreoffice docs, etc...).
+- Installation of nvidia-driver nvidia-settings (?)
