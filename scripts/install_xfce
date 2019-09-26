@@ -23,10 +23,4 @@ config() {
   if ask "$Q"; then
     install_symlink_to ".config/xfce4/terminal/terminalrc"
   fi
-  Q="Install keyboard shortcuts? [y/n] "
-  if ask "$Q"; then
-    TGT=".config/xfce4/xfconf/xfce-perchannel-xml"
-    TGT="$TGT/xfce4-keyboard-shortcuts.xml"
-    install_symlink_to "$TGT"
-  fi
 }
