@@ -49,4 +49,4 @@ alias pause="sleep 420 && google-chrome https://www.youtube.com/watch?v=WYs6Tud5
 # Aliases for mounting some remote filesystems with sshfs
 alias mount-webdav="sshfs bitsac:/mnt/shared/webdav /mnt/shared/webdav -C -o allow_other"
 alias mount-cluster="sshfs bitsac:bumper /mnt/cluster -C -o allow_other; sshfs bitsac:/mnt/running/$USER /mnt/running/$USER -C -o allow_other"
-alias mount-tgr="sshfs bitsac:/mnt/shared/taviguide/cases /mnt/tgr -C -o allow_other"
+alias mount-fhg="sshfs bitsac:/mnt/fhg /mnt/fhg -C -o allow_other"
