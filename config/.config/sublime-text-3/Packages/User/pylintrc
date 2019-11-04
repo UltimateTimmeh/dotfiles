@@ -46,6 +46,7 @@
 
 # TODO: remove cyclic-import.
 disable =
+    c-extension-no-member,
     cyclic-import,
     fixme,
     import-error,
