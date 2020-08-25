@@ -44,6 +44,7 @@ config() {
     install_symlink_to "$USERDIR/Preferences.sublime-settings"
     install_symlink_to "$USERDIR/pylintrc"
     install_symlink_to "$USERDIR/Python.sublime-settings"
+    install_symlink_to "$USERDIR/Python3.sublime-settings"
     install_symlink_to "$USERDIR/SublimeLinter.sublime-settings"
     install_symlink_to "$USERDIR/show_keyboard_shortcuts.py"
   fi

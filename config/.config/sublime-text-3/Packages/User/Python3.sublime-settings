@@ -1,0 +1,15 @@
+// These settings override both User and Default settings for the Python syntax
+{
+    // editor options
+    "draw_white_space": "selection",
+
+    // tabs and whitespace
+    "auto_indent": true,
+    "rulers": [80],
+    "smart_indent": true,
+    "tab_size": 4,
+    "trim_automatic_white_space": true,
+    "use_tab_stops": true,
+    "word_wrap": "auto",
+    "wrap_width": 80
+}
