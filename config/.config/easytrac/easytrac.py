@@ -18,8 +18,6 @@ def get_week(year, calendar_week):
     monday = datetime.datetime.strptime(monday_str, dt_fmt)
     monday = monday + datetime.timedelta(days=0.125)
     sunday = monday + datetime.timedelta(days=6.750)
-    monday = monday.isoformat() + "Z"
-    sunday = sunday.isoformat() + "Z"
     return monday, sunday
 
 
@@ -87,8 +85,11 @@ def main():
     service = build('calendar', 'v3', credentials=creds)
 
     # Call the Calendar API to get all events from that week.
-    events_result = service.events().list(calendarId="primary", timeMin=monday,
-        timeMax=sunday, singleEvents=True, orderBy="startTime").execute()
+    time_min = monday.isoformat() + "Z"
+    time_max = sunday.isoformat() + "Z"
+    events_result = service.events().list(calendarId="primary",
+        timeMin=time_min, timeMax=time_max, singleEvents=True,
+        orderBy="startTime").execute()
     events = events_result.get("items")
 
     # Create a dictionary of the total duration of each event type.
@@ -111,9 +112,11 @@ def main():
         durations[event_type] += duration
 
     # Print the result.
+    week_header = f"week {week} ({monday.date()} to {sunday.date()})"
     if not durations:
-        print(f"No data for week {week}!")
+        print(f"No data for {week_header}!")
         return
+    print(f"{week_header}:".capitalize())
     for event_type, duration in durations.items():
         print(f"{event_type}: {duration}")
     print(f"Total: {sum(durations.values())}")
