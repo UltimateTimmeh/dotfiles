@@ -9,6 +9,9 @@ SCRIPTSDIR="$(dirname "$(pwd)/$0")"
 software() {
   Q="Install EasyTrac? [y/n] "
   if ask "$Q"; then
+    PKG="google-api-python-client google-auth-httplib2 google-auth-oauthlib"
+    sudo apt install python3-pip
+    sudo pip3 install $PKG
     install_symlink_to ".config/easytrac/easytrac.py"
   fi
 }
