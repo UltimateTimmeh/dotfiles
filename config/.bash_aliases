@@ -39,14 +39,10 @@ alias pdf="evince"
 # pyFormex aliases
 alias pysea="pyformex --search --"
 
-# Alias for activating and deactivating VPN
-alias vpnc="sudo feops_vpn_connect"
-alias vpnd="sudo feops_vpn_disconnect"
-
-# Alias for activating a work break countdown timer
-alias pause="sleep 420 && google-chrome https://www.youtube.com/watch?v=WYs6Tud55Sc"
-
 # Aliases for mounting some remote filesystems with sshfs
 alias mount-webdav="sshfs bitsac:/mnt/shared/webdav /mnt/shared/webdav -C -o allow_other"
 alias mount-cluster="sshfs bitsac:bumper /mnt/cluster -C -o allow_other; sshfs bitsac:/mnt/running/$USER /mnt/running/$USER -C -o allow_other"
 alias mount-fhg="sshfs bitsac:/mnt/fhg /mnt/fhg -C -o allow_other"
+
+# Alias for executing the EasyTrac script.
+alias easytrac="python3 $HOME/.config/easytrac/easytrac.py"

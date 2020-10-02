@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+# EasyTrac software/config installation module.
+
+# Source utility functions.
+SCRIPTSDIR="$(dirname "$(pwd)/$0")"
+. "$SCRIPTSDIR/utils"
+
+# Software installation.
+software() {
+  Q="Install EasyTrac? [y/n] "
+  if ask "$Q"; then
+    install_symlink_to ".config/easytrac/easytrac.py"
+  fi
+}
+
+# Config installation.
+config() {
+  return
+}
