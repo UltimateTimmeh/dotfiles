@@ -10,7 +10,7 @@ software() {
   Q="Install Thunderbird and Lightning? [y/n] "
   if ask "$Q"; then
     PKG="thunderbird lightning calendar-google-provider"
-    sudo apt-get install $PKG
+    sudo apt install $PKG
   fi
 }
 

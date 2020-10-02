@@ -10,7 +10,7 @@ software() {
   Q="Install mlocate? [y/n] "
   if ask "$Q"; then
     PKG="mlocate"
-    sudo apt-get install $PKG
+    sudo apt install $PKG
   fi
 }
 

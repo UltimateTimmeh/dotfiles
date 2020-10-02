@@ -10,7 +10,7 @@ software() {
   Q="Install PCManFM? [y/n] "
   if ask "$Q"; then
     PKG="pcmanfm"
-    sudo apt-get install $PKG
+    sudo apt install $PKG
   fi
 }
 

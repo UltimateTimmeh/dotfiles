@@ -288,7 +288,7 @@ annoying, so I figured out this permanent fix:
     Debian after having switched to Windows, I'm not entirely sure this works
     properly for me:
 
-        # apt-get install ntp
+        # apt install ntp
 
 1.  Edit the file `/etc/adjtime` to make Debian look at the hardware clock
     as local time instead of UTC:

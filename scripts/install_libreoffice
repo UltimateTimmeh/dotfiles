@@ -10,7 +10,7 @@ software() {
   Q="Install LibreOffice? [y/n] "
   if ask "$Q"; then
     PKG="libreoffice"
-    sudo apt-get install $PKG
+    sudo apt install $PKG
   fi
 }
 

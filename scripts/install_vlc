@@ -10,7 +10,7 @@ software() {
   Q="Install VLC Media Player? [y/n] "
   if ask "$Q"; then
     PKG="vlc"
-    sudo apt-get install $PKG
+    sudo apt install $PKG
   fi
 }
 

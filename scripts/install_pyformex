@@ -15,7 +15,7 @@ software() {
     PKG="$PKG python-matplotlib pkg-config libgts-dev libglib2.0-dev gcc"
     PKG="$PKG docutils-common admesh paraview vtk6 python-vtk6 vmtk python-vmtk"
     PKG="$PKG units python-scipy python-dicom"
-    sudo apt-get install $PKG
+    sudo apt install $PKG
     # pyFormex Git repository.
     read -rp "Username for 'ssh://git.feops.com': " USER
     REP="ssh://$USER@git.feops.com:1222/srv/git/pyformex.git"

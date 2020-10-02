@@ -10,7 +10,7 @@ software() {
   Q="Install PulseAudio? [y/n] "
   if ask "$Q"; then
     PKG="pulseaudio pavucontrol"
-    sudo apt-get install $PKG
+    sudo apt install $PKG
   fi
 }
 

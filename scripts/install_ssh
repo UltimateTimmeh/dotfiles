@@ -10,7 +10,7 @@ software() {
   Q="Install ssh and sshfs? [y/n] "
   if ask "$Q"; then
     PKG="ssh sshfs"
-    sudo apt-get install $PKG
+    sudo apt install $PKG
   fi
 }
 

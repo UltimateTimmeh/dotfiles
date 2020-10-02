@@ -10,7 +10,7 @@ software() {
   Q="Install Deluge? [y/n] "
   if ask "$Q"; then
     PKG="deluge"
-    sudo apt-get install $PKG
+    sudo apt install $PKG
   fi
 }
 

@@ -44,7 +44,7 @@ download_and_install_deb() {
   wget -P "/tmp" "$1"
   DEB="/tmp/$(basename "$1")"
   sudo dpkg -i "$DEB"
-  sudo apt-get -f install
+  sudo apt -f install
   rm -rvf "$DEB"
 }
 

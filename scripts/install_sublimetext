@@ -16,8 +16,8 @@ software() {
     PKG="pylint sublime-text"
     wget -qO - "$KEY" | sudo apt-key add -
     echo "$SRC" | sudo tee "$LST"
-    sudo apt-get update
-    sudo apt-get install $PKG
+    sudo apt update
+    sudo apt install $PKG
   fi
 }
 
