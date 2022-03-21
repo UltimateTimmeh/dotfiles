@@ -10,12 +10,13 @@
 		"GitGutter",
 		"GitHub Flavored Markdown Preview",
 		"Package Control",
+		"PlainTasks",
 		"Python 3",
 		"SideBarEnhancements",
 		"Sublime Tutor",
 		"SublimeLinter",
 		"SublimeLinter-pylint",
 		"Terminal",
-		"Theme - Flatland"
+		"Theme - Flatland",
 	],
 }
