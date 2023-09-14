@@ -25,7 +25,7 @@ software() {
 config() {
   Q="Install Sublime Text 3 config? [y/n] "
   if ask "$Q"; then
-    STDIR=".config/sublime-text-3"
+    STDIR=".config/sublime-text"
     # Package Control.
     IPDIR="$HOME/$STDIR/Installed Packages"
     PCTRL="$IPDIR/Package Control.sublime-package"

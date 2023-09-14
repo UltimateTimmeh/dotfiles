@@ -17,4 +17,8 @@
         "operand": "source.python"
       }],
   },
+  {
+    "keys": ["ctrl+shift+t"],
+    "command": "open_terminal",
+  }
 ]
