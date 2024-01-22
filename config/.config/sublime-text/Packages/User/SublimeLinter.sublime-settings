@@ -16,7 +16,7 @@
         "paths":
         [
         ],
-        "rcfile": "~/.config/sublime-text-3/Packages/User/pylintrc",
+        "rcfile": "~/.config/sublime-text/Packages/User/pylintrc",
         "show-codes": true
       }
     }

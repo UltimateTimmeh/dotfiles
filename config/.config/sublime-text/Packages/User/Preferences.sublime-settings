@@ -58,4 +58,5 @@
 	"vintage_start_in_command_mode": false,
 	"wide_caret": true,
 	"word_wrap": true,
+	"index_files": true,
 }
