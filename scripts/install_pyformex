@@ -7,28 +7,7 @@ SCRIPTSDIR="$(dirname "$(pwd)/$0")"
 
 # Software installation.
 software() {
-  Q="Install pyFormex? [y/n] "
-  if ask "$Q"; then
-    # pyFormex dependencies.
-    PKG="python-numpy python-opengl python-qt4 python-pyside"
-    PKG="$PKG python-qt4-gl python-dev libglu1-mesa-dev libfreetype6-dev"
-    PKG="$PKG python-matplotlib pkg-config libgts-dev libglib2.0-dev gcc"
-    PKG="$PKG docutils-common admesh paraview vtk6 python-vtk6 vmtk python-vmtk"
-    PKG="$PKG units python-scipy python-dicom"
-    sudo apt install $PKG
-    # pyFormex Git repository.
-    REP="https://www.gitlab.com/bverheg/pyformex.git"
-    TGT="$HOME/Documents/pyformex"
-    install_git_repo "$REP" "$TGT"
-    # pyFormex extra's
-    EXT="$TGT/pyformex/extra"
-    if [ -d "$EXT" ]; then
-      CWD=$(pwd)
-      cd "$EXT/gts"
-      sudo make all
-      cd "$CWD"
-    fi
-  fi
+  return
 }
 
 # Config installation.
@@ -36,5 +15,7 @@ config() {
   Q="Install pyFormex config? [y/n] "
   if ask "$Q"; then
     install_symlink_to ".config/pyformex/pyformex.conf"
+    install_symlink_to ".config/pyformex/laaopp.conf"
+    install_symlink_to ".config/pyformex/tavipp.conf"
   fi
 }
