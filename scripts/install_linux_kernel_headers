@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+# Template for software/config installation module.
+
+# Source utility functions.
+SCRIPTSDIR="$(dirname "$(pwd)/$0")"
+. "$SCRIPTSDIR/utils"
+
+# Software installation.
+software() {
+  Q="Install Linux kernel headers? [y/n] "
+  if ask "$Q"; then
+    sudo apt install linux-headers-$(uname -r)
+  fi
+}
+
+# Config installation.
+config() {
+  return
+}
