@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Template for software/config installation module.
+# Linux kernel headers software/config installation module.
 
 # Source utility functions.
 SCRIPTSDIR="$(dirname "$(pwd)/$0")"

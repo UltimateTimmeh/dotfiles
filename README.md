@@ -83,11 +83,11 @@ This repository includes installation modules for the following software items:
   for Git repositories. Installed with the package manager (git gitk).
   Configuration available.
 
-- **Google Chrome**: My preferred web browser. Installed from the official .deb
-  file downloaded from Google.
-
 - **LibreOffice**: The poor man's Office suite. Installed with the package
   manager (libreoffice).
+
+- **Linux kernel headers**: The latest Linux kernel headers, needed to build the
+  VirtualBox Guest Additions.
 
 - **mlocate**: Uses a routinely-updated database of the filesystem to search for
   files more quickly than with the `find` command. Installed with the package
@@ -96,19 +96,9 @@ This repository includes installation modules for the following software items:
 - **PCManFM**: My preferred file manager. Installed with the package manager
   (pcmanfm). Configuration available.
 
-- **Qalculate!**: A powerfull calculator. Installed with the package manager
-  (qalculate).
-
 - **ssh**: Provides secure access to and from remote machines. Also installs
   sshfs, for mounting remote filesystems. Installed with the package manager
   (ssh sshfs). Configuration available.
-
-- **Sublime Text**: My preferred text editor. Installed from the Sublime Text
-  package repositories (sublime-text). Configuration available.
-
-  *Note:* Installation of the Sublime Text configuration sets up automatic
-  installation of Package Control and a number of Sublime Packages, applied when
-  starting Sublime Text for the first time.
 
 - **Xfce4**: My preferred desktop environment. Doesn't install software items
   (because I'm assuming those are already installed), but includes installation
@@ -118,8 +108,8 @@ This repository includes installation modules for the following software items:
 
 ### Testing
 
-The installation procedure is periodically tested on a virtual machine with a
-fresh installation of Debian Bullseye with Xfce4 desktop environment.
+The installation procedure is periodically used on a virtual machine with a
+fresh installation of the latest Debian release with Xfce4 desktop environment.
 
 ## Extras
 
@@ -135,51 +125,34 @@ I find the following keyboard shortcuts useful. They can be configured in
 |:----------- |:---------------------------- |:-------------------------- |
 | Ctrl+Alt+T  | xfce4-terminal               | Open a terminal window     |
 | Ctrl+Alt+F  | pcmanfm                      | Open a file manager window |
-| Ctrl+Alt+S  | subl                         | Launch Sublime Text        |
-| Calculator  | qalculate                    | Launch Qalculate!          |
-| PrntScrn    | xfce4-screenshooter          | Take a screenshot          |
+| Ctrl+Alt+S  | code                         | Launch Visual Studio Code  |
 
 ### Compose key
 
 To type characters like `é` and `ç` using a QWERTY keyboard layout, you need to
-configure the `compose` key. This can be done by editing the following line in
-the file /etc/default/keyboard (only possible with root permissions, of
-course)::
+configure the `compose` key. In Xfce this can be done by navigating to
+`Settings -> Keyboard`, selecting the `Layout` tab and specifying the `Compose
+key` to your key of choosing. You may have to disable `Use system defaults` to
+be able to select a compose key. My preference goes to `Caps Lock`, since I
+otherwise don't really use it anyway.
 
-    XKBOPTIONS="compose:rctrl"
+After configuring the compose key, try typing an `é`. Open a text editor. After
+tapping the compose key, type the `'` key followed by the `e` key. The result
+should be `é`. Try different combinations! Can you figure out how to type `ç`?
+There are many possible and very useful combinations.
 
-This will set the `Right Ctrl` key as the compose key. Here's a list of all
-compose key possibilities:
+You can usually find a full list in the following file, every line starting
+with `<Multi_key>` can be typed using the compose key:
 
-    compose:ralt    Right Alt
-    compose:lwin    Left Win
-    compose:rwin    Right Win
-    compose:menu    Menu
-    compose:lctrl   Left Ctrl
-    compose:rctrl   Right Ctrl
-    compose:caps    Caps Lock
-    compose:102     &lt;Less/Greater&gt;
-    compose:paus    Pause
-    compose:prsc    PrtSc
-    compose:sclk    Scroll Lock
-
-You need to reboot for the change to take effect. Once restarted, you can try
-typing an `é`. Open a text editor. While holding the compose key, type the `'`
-key. Release the compose key and then type `e`. The result should be `é`. Try
-different combinations! Can you figure out how to type `ç`?
+    /usr/share/X11/locale/en_US.UTF-8/Compose
 
 ### Install Linux kernel headers
 
 Every now and then, updating Debian packages includes installing a new kernel.
 When running Debian through Virtual Box, this means the guest additions will no
 longer work properly, and you have to re-install them. Before you can do that,
-however, you first need to install new Linux kernel headers. You can do so
-with this command::
+however, you first need to install new Linux kernel headers. There is an
+installation module for this included in the dotfiles, or you can do so
+manually with this command:
 
     sudo apt install linux-headers-$(uname -r)
-
-## To do
-
-- Include setting up the behavior of the PgUp key (or automate).
-  This is found in the file `/etc/inputrc`.
-- Installation of templates (python script, pyformex script, libreoffice docs, etc...).
