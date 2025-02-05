@@ -1,1 +1,1 @@
-export PYFORMEX_ROOT="$HOME/Documents/pyformex"
+export PYFORMEX_ROOT="/usr/local/lib/python3.11/dist-packages/pyformex-3.5"
